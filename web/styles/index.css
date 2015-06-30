@@ -1,0 +1,203 @@
+*{
+    font-family: "Champagne_Limousines";
+    color: #4a3e3e;
+    font-style:normal;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face
+{
+ font-family: 'Champagne_Limousines';
+ src: url('Champagne_Limousines.ttf');
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    background-image: url(../images/fondo.jpg);
+    background-size: cover;
+    margin: 0;
+    font-size: 16px;
+}
+
+section{
+    width: 600px;
+    height: 500px;
+    background: rgb(238, 239, 241);
+    border-radius: 60px;
+    display: table;
+    margin: auto;
+    margin-top: 8%;
+    -webkit-box-shadow: 4px 6px 15px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 6px 15px 1px rgba(0,0,0,0.75);
+    box-shadow: 4px 6px 15px 1px rgba(0,0,0,0.75);
+
+}
+
+h1{
+    font-size: 3.2em;
+    width: 230px;
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 98px;
+    color: rgb(44, 62, 80);
+}
+
+form{
+    margin-top: 40px;
+    border-top: 2px solid rgb(166, 166, 166);
+    height: 300px;
+    z-index: 10;
+   
+}
+
+#logo{
+    width: 110px;
+    position: absolute;
+    margin-top: -110px;
+    margin-left: 390px;
+}
+
+#filtro{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(44, 62, 80, 0.4);
+}
+
+#entrar{
+    width: 376px;
+    height: 40px;
+    background: rgb(44, 62, 80);
+    border-radius: 10px;
+    display: table;
+    margin: auto;
+    margin-top: 5%;
+    z-index: 10;
+    font-size: 1.6em;
+    padding: 6px;
+    margin-right: 123px;
+    border-style: none;
+    color: aliceblue;
+}
+
+#loginIcon{
+    width: 70px;
+    margin-top: -50px;
+    margin-left: 440px;
+}
+
+#recordarCB{
+    margin-left: 105px;
+    border-style: none;
+    width: 15px;
+    height: 15px; 
+}
+
+
+#recordar{
+    width: auto;
+    margin-top: -24px;
+    margin-left: 130px;
+    font-size: 1.2em;
+    color: rgb(44, 62, 80);
+}
+
+.error{
+    display: none;
+    margin: auto;
+    color: rgb(237, 125, 49);
+  
+}
+
+.inputs{
+    color: rgb(166, 166, 166);
+    width: 340px;
+    height: 30px;
+    border: 2px solid;
+    border-radius: 10px;
+    display: table;
+    margin: auto;
+    margin-top: 6%;
+    z-index: 10;
+    font-size: 1.6em;
+    padding: 5px;
+    padding-left: 50px;
+    font-family:inherit;
+}
+
+.loginIcons{
+    width: 32px;
+    position: absolute;
+    margin-top: -38px;
+    margin-left: 465px;
+}
+
+.EntrarBtn:hover{
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 610px){
+    
+    section{
+        width: 90%;
+        border-radius: 50px;
+    }
+    
+    
+    form{
+     display: table;
+     margin: auto;
+    }
+    
+    #entrar{
+        width: 200px;
+        display: table;
+        margin: auto;
+        margin-top: 20px;
+         font-size: 1.4em;
+    }
+    
+    #loginIcon{
+        margin-left: 165px;
+    }
+    .inputs{
+        width: 220px;
+        display: table;
+        margin: auto;
+        margin-top: 20px;
+        padding-left: 0;
+        padding-left: 10px;
+        font-size: 1.4em;
+    }
+    
+    .loginIcons{
+        width: 32px;
+        margin-left: 200px;
+    }
+    
+    h1{
+        display: table;
+        margin: auto;
+        margin-top: 20px;
+        font-size: 2.6em;
+        width: auto;
+    }
+    
+    #logo{
+        
+        width: 100px;
+        display: table;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+  
+}

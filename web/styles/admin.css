@@ -1,0 +1,277 @@
+*{
+    font-family: "Champagne_Limousines";
+    color: #4a3e3e;
+    font-style:normal;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face
+{
+ font-family: 'Champagne_Limousines';
+ src: url('Champagne_Limousines.ttf');
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    margin: 0;
+    font-size: 16px;
+    overflow-x: hidden;
+}
+
+header{
+    width: 100%;
+    height: 70px;
+    background-color: rgb(45, 176, 105);
+   -webkit-box-shadow: 0px 4px 7px -2px rgba(0,0,0,0.75);
+   -moz-box-shadow: 0px 4px 7px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px 4px 7px -2px rgba(0,0,0,0.75);
+    position: absolute;
+    border-bottom: 2px solid rgba(44, 62, 80, 0.47);
+     z-index: -1;
+}
+
+#btnCitas{
+    width: 134px;
+    position: absolute;
+    margin-top: 17px;
+    margin-left: 80px;
+    color: white;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+#citasicon{
+
+    position: absolute;
+    margin-top: -16px;
+    
+}
+
+#titulo{
+    width: 100%;
+    position: absolute;
+    display: table;
+    margin: auto;
+    font-size: 3em;
+    margin-top: 5px;
+    color: white;
+    text-align: center;
+     z-index: -1;
+}
+
+#frmBuscar{
+    float: right;
+    width: 270px;
+    margin-top: 17px;
+    margin-right: 130px;
+}
+
+#frmBuscar input{
+  
+    border: 1px solid rgb(44,62, 80);
+    
+}
+
+
+#txtBuscar{
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    padding-left: 20px;
+    font-size: 20px;
+      height: 35px;
+}
+
+#btnBuscar{
+    position: absolute;
+    width: 50px;
+    height: 37px;
+    background-color: rgb(44,62, 80);
+    cursor: pointer;
+}
+
+#buscaricon{
+    position: absolute;
+    width: 30px;
+    margin-left: 10px;
+    margin-top: 2.3px;
+    cursor: pointer;
+}
+
+#btnConfiguraciones{
+    
+    float: right;
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.64);
+    border-left: 2px solid rgba(44, 62, 80, 0.47);
+     cursor: pointer;
+    margin-right: -400px;
+}
+
+#conficon{
+    position: absolute;
+    display: table;
+    margin-left: 13px;
+    margin-top: 10px;
+    width: 50px;
+}
+
+
+footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    margin-top: 600px;
+    background-color: rgb(237, 237, 237);
+    border-top: 2px solid rgb(118,113,113);
+   -webkit-box-shadow: 0px -3px 7px -2px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px -3px 7px -2px rgba(0,0,0,0.75);
+box-shadow: 0px -3px 7px -2px rgba(0,0,0,0.75);
+     z-index: -1;
+}
+
+#nombreUsuario{
+    margin-top: 16px;
+    margin-left: 20px;
+    position: absolute;
+}
+
+#tituloInferior{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    z-index: -1;
+}
+
+#iconvacuna{
+    position: absolute;
+    width: 40px;
+    margin-left: 15px;
+}
+
+#btnLogout{
+    margin-top: 7px;
+    margin-right: 18px;
+    float: right;
+}
+
+#btnSalir{
+        cursor: pointer;
+        width: 100px;
+        height: 50px;
+        float: right;
+        display: block;
+      cursor: pointer;
+}
+
+#salirDiv{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(109, 109, 109, 0.84);
+    display: none;
+    z-index: 10;
+    
+}
+
+#salirForm{
+    display: table;
+    margin: auto;
+    margin-top: 250px;
+    border-radius: 10px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    background: rgb(237, 237, 237);
+    text-align: center;
+    width: 500px;
+    
+}
+
+#salirForm input{
+    
+    background: rgb(44, 62, 80);
+    color: aliceblue;
+    border-radius: 5px;
+    border-style: none;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 30px;
+    width: 50px;
+    height: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+#noSalir{
+     background: rgb(237, 125, 49)!important;
+    
+}
+#PanelMenu{
+    display: none;
+    background: rgb(255, 255, 255);
+    width: 299px;
+    height: 100%;
+    text-align: center;
+    z-index: 1;
+    position: absolute;
+    border-left: 1px solid  rgba(74, 62, 62, 0.48);
+    -webkit-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.75);
+box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+#PanelMenu h2{
+    font-size: 1.7em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: rgb(237, 125, 49);
+}
+
+#ocultarMenu{
+    margin-left: 234px;
+    margin-top: 4px;
+    width: 60px;
+    cursor: pointer;
+}
+
+.btnsMenu{
+    margin-top: 35px;
+    background: rgb(44, 62, 80);
+    color: aliceblue;
+    border-radius: 5px;
+    border-style: none;
+    width: 220px;
+    height: 35px;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+
+
+#contenedorMenu{
+    float: right;
+    width: 300px;
+}
+
+
+section{
+    
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 200px;
+    
+}
+
+@media screen and (max-width: 1050px){
+    .titulos{
+        display: none !important;
+    }
+}
