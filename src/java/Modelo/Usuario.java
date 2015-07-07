@@ -3,7 +3,7 @@ package Modelo;
 public class Usuario{
 
     private int id;
-    private String cedula;
+    private int cedula;
     private String nombre;
     private String apellidos;
     private String usuario;
@@ -13,13 +13,14 @@ public class Usuario{
     private String fechaNacimiento;
     private int activo; //1 = activo, 2 = inactivo
     private String rol;
+    private int telefono;
 
     
 
     public Usuario() {
     }
 
-    public Usuario(int id, String cedula, String nombre, String apellidos, String usuario, String contrasenia, String correo, String direccion, String fechaNacimiento, int activo, String rol) {
+    public Usuario(int id, int cedula, String nombre, String apellidos, String usuario, String contrasenia, String correo, String direccion, String fechaNacimiento, int activo, String rol, int telefono) {
         this.id = id;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -31,6 +32,7 @@ public class Usuario{
         this.fechaNacimiento = fechaNacimiento;
         this.activo = activo;
         this.rol = rol;
+        this.telefono = telefono;
     }
 
     public int getId() {
@@ -41,11 +43,11 @@ public class Usuario{
         this.id = id;
     }
 
-    public String getCedula() {
+    public int getCedula() {
         return cedula;
     }
 
-    public void setCedula(String cedula) {
+    public void setCedula(int cedula) {
         this.cedula = cedula;
     }
 
@@ -120,7 +122,15 @@ public class Usuario{
     public void setRol(String rol) {
         this.rol = rol;
     }
-    
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
     
     
 }

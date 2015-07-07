@@ -42,6 +42,10 @@ public class Controlador extends HttpServlet {
             this.login(request, response);
         }else if (accion.equals("Logout")){
             this.logout(request, response);
+        }else if (accion.equals("agregarCliente")){
+            this.agregarCliente(request, response);
+        }else if(accion.equals("existeUsuario")){
+            this.existeUsuario(request, response);
         }
 
     }
@@ -64,13 +68,10 @@ public class Controlador extends HttpServlet {
             session.setAttribute("rol", User.getRol());
             
             if (User.getRol().equals("administrador")) {
-                
+              
                 response.sendRedirect("administrador.jsp");
-                
             }else{
-                
                 response.sendRedirect("cliente.jsp");
-            
             }
             
         }else {
@@ -85,4 +86,42 @@ public class Controlador extends HttpServlet {
         session.setAttribute("rol", "null");
         response.sendRedirect("index.jsp");
     }
+    
+    private void agregarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+           Usuario cliente = new Usuario();
+        int mensaje = 0;
+        
+        if(UsuarioBD.existeUsuario(request.getParameter("txtUsuario"))==1){
+            mensaje = 1; //ya existe el usuario
+        }else{
+     
+        cliente.setNombre(request.getParameter("txtNombre"));
+        cliente.setApellidos(request.getParameter("txtApellidos"));
+        cliente.setCedula(Integer.parseInt(request.getParameter("txtCedula")));
+        cliente.setFechaNacimiento(request.getParameter("diaCliente")+"/"+request.getParameter("mesCliente")+"/"+request.getParameter("annioCliente"));
+        cliente.setCorreo(request.getParameter("txtEmail"));
+        cliente.setDireccion(request.getParameter("txtDirecion"));
+        cliente.setUsuario(request.getParameter("txtUsuario"));
+        cliente.setContrasenia(request.getParameter("txtContrasenia"));
+        cliente.setTelefono(Integer.parseInt(request.getParameter("txtTelefono")));
+        cliente.setActivo(1);
+        cliente.setRol("cliente");
+        
+           /* if (UsuarioBD.guardarUsuario(cliente)==0) {
+                 mensaje = 2; //error al guardar
+            }else{
+                 mensaje = 3; //exito
+            }   */
+        }
+        
+        response.sendRedirect("administrador.jsp?msg="+UsuarioBD.guardarUsuario(cliente)+"");
+     
+    }
+    
+    private String existeUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        return "AJAX funciona";
+        
+    }
+    
 }
