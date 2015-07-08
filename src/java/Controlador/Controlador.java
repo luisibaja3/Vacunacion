@@ -45,7 +45,9 @@ public class Controlador extends HttpServlet {
         }else if (accion.equals("agregarCliente")){
             this.agregarCliente(request, response);
         }else if(accion.equals("existeUsuario")){
-            this.existeUsuario(request, response);
+            this.existeUsuario();
+        } else if(accion.equals("cargarClientes")){
+            this.cargarClientes(request, response);
         }
 
     }
@@ -118,9 +120,15 @@ public class Controlador extends HttpServlet {
      
     }
     
-    private String existeUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private String existeUsuario(){
         
         return "AJAX funciona";
+        
+    }
+    
+    private void cargarClientes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        
         
     }
     

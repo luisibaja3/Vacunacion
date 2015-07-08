@@ -35,6 +35,27 @@ header{
      z-index: -1;
 }
 
+table {
+    border-collapse: collapse;
+    text-align: center;
+    background: white;
+    font-size: 1.3em;
+}
+
+table, td, th {
+    border: 1px silver solid;
+}
+
+td, th {
+    padding: 7px 10px;
+}
+
+td {
+    text-align: left;
+    vertical-align: top;
+    text-align: center;
+}
+
 #btnCitas{
     width: 134px;
     position: absolute;
@@ -381,7 +402,14 @@ section{
     margin-top: 20px;
     font-size: 1.2em;
     margin-left: 14%;
-     cursor: pointer;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.btnOpciones{
+    cursor: pointer;
+    width: 20px;
+    margin: 3px;
 }
 
 @media screen and (max-width: 1050px){

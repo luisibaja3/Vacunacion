@@ -3,6 +3,10 @@
     Created on : Jun 18, 2015, 6:09:57 PM
     Author     : LuisAntonio
 --%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
+<%@page import="Modelo.UsuarioBD"%>
+<%@page import="Modelo.Usuario"%>
 <%@page import="javax.swing.JOptionPane"%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.lang.String"%>
@@ -248,7 +252,7 @@
                     
                     <input type="text" name="txtNombre" value="" placeholder="Nombre">
                     <input type="text" name="txtApellidos" value="" placeholder="Apellidos">
-                    <input type="number" name="txtCedula" value="" placeholder="Cédula">
+                    <input type="number" name="txtCedula" value="" placeholder="Cédula" min="1">
                   
                     <div id="contenedorFecha">
                     
@@ -282,9 +286,55 @@
                 <h1 id="tituloVerTodos">Clientes</h1>
                 
                 <h2 id="btnVolverAgregar">+ agregar clientes</h2>
-                <table>
-                
-                </table>
+                            
+                <br>
+                <table border="1" style="margin: 0 auto;">
+                <tr>
+                    <td class="columna"><b>cédula</b></td>
+                    <td class="columna"><b>nombre</b></td>
+                    <td class="columna"><b>usuario</b></td>
+                    <td class="columna"><b>contraseña</b></td>
+                    <td class="columna"><b>dirección</b></td>
+                    <td class="columna"><b>nacimiento</b></td>
+                    <td class="columna"><b>estado</b></td>
+                    <td class="columna"><b>correo</b></td>
+                    <td class="columna"><b>teléfono</b></td>
+                    <td class="columna"><b>opciones</b></td>
+                </tr>
+                <%-- Lista de todos los productos --%>
+                <%
+                            ArrayList<Usuario> lista = UsuarioBD.cargarClientes();
+                         
+                     for (Usuario User : lista) {
+                         String activoS = "";
+                                if(User.getActivo()==1){
+                                    activoS = "activado";
+                                }else{ 
+                                    activoS = "desactivado";
+                                }
+                %>
+                <tr>
+                    <td><%= User.getCedula()%></td>
+                    <td><%= User.getNombre()+" "+User.getApellidos()%></td>
+                    <td><%= User.getUsuario() %></td>
+                    <td><%= User.getContrasenia()%></td>
+                    <td><%= User.getDireccion()%></td>
+                    <td><%= User.getFechaNacimiento()%></td>
+                    <td><%= activoS%></td>
+                    <td><%= User.getCorreo()%></td>
+                    <td><%= User.getTelefono()%></td>
+                    <%-- Enlaces a las paginas de actualizar o eliminar--%>
+                    <td>
+                        <a><img src="images/edit.png" class="btnOpciones"></a>
+                        
+                        <a><img src="images/delete.png" class="btnOpciones"></a>
+                    </td>
+                </tr>
+                <%
+                            }
+                %>
+
+            </table>
             
             </div>
             

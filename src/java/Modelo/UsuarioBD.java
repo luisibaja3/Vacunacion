@@ -2,9 +2,9 @@ package Modelo;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServlet;
 
 /**
@@ -44,7 +44,7 @@ public class UsuarioBD extends HttpServlet {
                 User.setActivo(Integer.parseInt(rs.getString("Activo")));
                 User.setRol(rs.getString("Rol"));
                 User.setCorreo(rs.getString("Correos"));
-                User.setTelefono(rs.getShort("Telefono"));
+                User.setTelefono(Integer.parseInt(rs.getString("Cedula")));
             }
             ConexionBD.cerrarCall(cl);
             ConexionBD.cerrarConexion(cn);
@@ -146,5 +146,54 @@ public class UsuarioBD extends HttpServlet {
         return exito;
     }
     
+       public static synchronized ArrayList<Usuario> cargarClientes() {
+        //El array que contendra todos nuestros productos
+        ArrayList<Usuario> lista = new ArrayList<Usuario>();
+        Connection cn = null;
+        CallableStatement cl = null;
+        ResultSet rs = null;
+        try {
+            //Nombre del procedimiento almacenado
+            String call = "{CALL cargarClientes()}";
+            cn = ConexionBD.getConexion();
+            cl = cn.prepareCall(call);
+            //La sentencia lo almacenamos en un resulset
+            rs = cl.executeQuery();
+            //Consultamos si hay datos para recorrerlo
+            //e insertarlo en nuestro array
+            while (rs.next()) {
+                Usuario User = new Usuario();
+                //Obtenemos los valores de la consulta y creamos
+                //nuestro objeto usuario
+                               
+                User.setId(Integer.parseInt(rs.getString("IdUsuario")));
+                User.setCedula(Integer.parseInt(rs.getString("Cedula")));
+                User.setNombre(rs.getString("Nombre"));
+                User.setApellidos(rs.getString("Apellidos"));
+                User.setUsuario(rs.getString("Usuario"));
+                User.setContrasenia(rs.getString("Contrasenia"));
+                User.setDireccion(rs.getString("Direccion"));
+                User.setFechaNacimiento(rs.getString("FechaNacimiento"));
+                User.setActivo(Integer.parseInt(rs.getString("Activo")));
+                User.setRol(rs.getString("Rol"));
+                User.setCorreo(rs.getString("Correos"));
+                User.setTelefono(Integer.parseInt(rs.getString("Telefono")));
+                //Lo adicionamos a nuestra lista
+                lista.add(User);
+            }
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+        }
+        return lista;
+    }
    
 }
