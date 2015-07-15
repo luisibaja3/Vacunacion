@@ -31,6 +31,9 @@
             
                 $("#noSalir").click(cerrarDivSalir);  
                 
+                $("#cerrarFormEditar").click(function(){
+                     $("#FondoEditarUno").fadeOut();
+                });
                 
                 $("#btnVolverAgregar").click(function(){ $("#FondoVerTodos").fadeOut()});
                                 $(".cerrarForm").click(cerrarDivSalir);     
@@ -250,6 +253,45 @@
             
             <div id="FondoVerTodos">
             
+           <div id="FondoEditarUno" class="FondFrms">
+            
+                
+                           <form role="form" method="post" action="Controlador" id="clienteForm" onsubmit="return validarFormCliente(this);">
+                    <img id="cerrarFormEditar" src="images/close.png">
+                
+                    <h3 class="titutoFrm">Editar cliente</h3>
+                
+                    <input type="hidden" name="action" value="agregarCliente">
+                    
+                    <input type="text" name="txtNombre" value="" placeholder="Nombre">
+                    <input type="text" name="txtApellidos" value="" placeholder="Apellidos">
+                    <input type="number" name="txtCedula" value="" placeholder="Cédula" min="1">
+                  
+                    <div id="contenedorFecha">
+                    
+                <h3>fecha de nacimiento:</h3>
+                   <input class="fechaForm" type="number" name="diaCliente" value="" placeholder="día" id="diaCliente" min="1" max="31">  
+                    <input class="fechaForm" type="number" name="mesCliente" value="" placeholder="mes" id="mesCliente" min="1" max="12">
+                   <input class="fechaForm" type="number" name="annioCliente" value="" placeholder="año" id="annioCliente" min="1900" max="2200">
+                       
+                    </div>
+                   
+                
+                    <input type="email" name="txtEmail" value="" placeholder="Correo">
+                    <input type="number" name="txtTelefono" value="" placeholder="Teléfono">
+                    <input type="text" name="txtDirecion" value="" placeholder="Dirección">
+                    <input type="text" name="txtUsuario" value="" placeholder="Usuario">
+                    <input type="text" name="txtContrasenia" value="" placeholder="Contraseña">
+             
+                    <input type="submit" value="Guardar" class="btnGuardar">
+                       <h3 id="complete" class="frmAlertas">Complete todos los campos</h3>
+                        <h3 id="existe" class="frmAlertas">Error al guardar, usuario ya existe</h3>
+              
+             </form> 
+               
+            
+            </div>
+                
                 <img class="cerrarForm" src="images/close.png">
                 
                 <h1 id="tituloVerTodos">Clientes</h1>
@@ -270,38 +312,24 @@
                     <td class="columna"><b>teléfono</b></td>
                     <td class="columna"><b>opciones</b></td>
                 </tr>
-                <%-- Lista de todos los productos --%>
-                <%
-                            ArrayList<Usuario> lista = UsuarioBD.cargarClientes();
-                         
-                     for (Usuario User : lista) {
-                         String activoS = "";
-                                if(User.getActivo()==1){
-                                    activoS = "activado";
-                                }else{ 
-                                    activoS = "desactivado";
-                                }
-                %>
+                
                 <tr>
-                    <td><%= User.getCedula()%></td>
-                    <td><%= User.getNombre()+" "+User.getApellidos()%></td>
-                    <td><%= User.getUsuario() %></td>
-                    <td><%= User.getContrasenia()%></td>
-                    <td><%= User.getDireccion()%></td>
-                    <td><%= User.getFechaNacimiento()%></td>
-                    <td><%= activoS%></td>
-                    <td><%= User.getCorreo()%></td>
-                    <td><%= User.getTelefono()%></td>
-                    <%-- Enlaces a las paginas de actualizar o eliminar--%>
+                    <td>1234123></td>
+                    <td>Luis Sibaja></td>
+                    <td>luisibaja3></td>
+                    <td>qwerqew</td>
+                    <td>Arenal</td>
+                    <td>26/03/1995></td>
+                    <td>activado</td>
+                    <td>luisibaja3@hormail.cpm</td>
+                    <td>7890987</td>
                     <td>
                         <a><img src="images/edit.png" class="btnOpciones"></a>
                         
                         <a><img src="images/delete.png" class="btnOpciones"></a>
                     </td>
                 </tr>
-                <%
-                            }
-                %>
+              
 
             </table>
             

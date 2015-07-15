@@ -254,16 +254,15 @@
                     <input type="text" name="txtApellidos" value="" placeholder="Apellidos">
                     <input type="number" name="txtCedula" value="" placeholder="Cédula" min="1">
                   
-                    <div id="contenedorFecha">
+                <div id="contenedorFecha">
                     
-                <h3>fecha de nacimiento:</h3>
-                   <input class="fechaForm" type="number" name="diaCliente" value="" placeholder="día" id="diaCliente" min="1" max="31">  
+                    <h3>fecha de nacimiento:</h3>
+                    <input class="fechaForm" type="number" name="diaCliente" value="" placeholder="día" id="diaCliente" min="1" max="31">  
                     <input class="fechaForm" type="number" name="mesCliente" value="" placeholder="mes" id="mesCliente" min="1" max="12">
-                   <input class="fechaForm" type="number" name="annioCliente" value="" placeholder="año" id="annioCliente" min="1900" max="2200">
-                       
-                    </div>
-                   
+                    <input class="fechaForm" type="number" name="annioCliente" value="" placeholder="año" id="annioCliente" min="1900" max="2200">
                 
+                </div>
+               
                     <input type="email" name="txtEmail" value="" placeholder="Correo">
                     <input type="number" name="txtTelefono" value="" placeholder="Teléfono">
                     <input type="text" name="txtDirecion" value="" placeholder="Dirección">
@@ -277,7 +276,6 @@
              </form>
             
         </div>
-            
             
             <div id="FondoVerTodos">
             
@@ -386,7 +384,7 @@
                         <img src="images/off.png" id="btnLogout">
                        
                    </div>
-            <h1 class="titulos" id="tituloInferior">Control de vacunación <img src="images/logo.png" id="iconvacuna"></h1>
+            <h1 class="titulos" id="tituloInferior">Control de vacunación<img src="images/logo.png" id="iconvacuna"></h1>
           
         </footer>
     </body>
