@@ -1,5 +1,5 @@
 <%-- 
-    Document   : administrador
+    Document   : Administrador
     Created on : Jun 18, 2015, 6:09:57 PM
     Author     : LuisAntonio
 --%>
