@@ -39,186 +39,8 @@
         <link rel="stylesheet" type="text/css" href="styles/admin.css">
         <link rel="stylesheet" type="text/css" href="styles/animate.css">
         <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript">
-            
-            $(document).ready(function () {
-                
-                //captura de la tecla esc para cerrar varios divs
-                $(document).bind('keydown',function(e){
-                    if ( e.which == 27 ) {
-                               ocultarMenu();
-                        cerrarDivSalir();
-                        };
-                });
-                
-                //Funciones para cerrar forms
-                $("#btnLogout").click(function() {
-                   $("#salirDiv").fadeIn();
-                });
-                
-                $("#btnAbrirClientes").click(function() {
-                   $("#clienteDiv").fadeIn();
-                });
-            
-                $("#noSalir").click(cerrarDivSalir);  
-                
-                
-                $("#btnVolverAgregar").click(function(){ $("#FondoVerTodos").fadeOut()});
-                                $(".cerrarForm").click(cerrarDivSalir);     
-
-                function cerrarDivSalir(){
-                    $(".FondFrms").fadeOut();
-                    $("#FondoVerTodos").fadeOut();
-
-                    
-                }
-                
-                //Funciones para el panel del menu
-                
-                $("#btnConfiguraciones").click(function(){
-                
-                    
-                    animate(".menu", 'fadeInRight');
-                    $("#PanelMenu").fadeIn();
-                    
-                });
-                
-                $("#ocultarMenu").click(ocultarMenu);
-                
-                function ocultarMenu(){
-                $("#PanelMenu").fadeOut();
-                    animate(".menu", 'fadeOutRight');
-                    
-                }
-                
-                
-              function animate(element_ID, animation) {
-                $(element_ID).addClass(animation);
-                var wait = window.setTimeout( function(){
-                $(element_ID).removeClass(animation)}, 1000
-            );
-        }
-                
-            
-                //funciones para ver todos los datos de las entidades
-                
-          $("#VerTodosClientes").click(function(){
-            
-             $("#FondoVerTodos").fadeIn();
-                
-            
-            });
-        
-            
-                
-               
-            });
-            //Validacion del form cliente
-            function validarFormCliente(formulario){
-            
-                if(formulario.txtNombre.value==""){
-                    formulario.txtNombre.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtApellidos.value==""){
-                    formulario.txtApellidos.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtCedula.value==""){
-                    formulario.txtCedula.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.diaCliente.value==""){
-                    formulario.diaCliente.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.mesCliente.value==""){
-                    formulario.mesCliente.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.annioCliente.value==""){
-                    formulario.annioCliente.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtEmail.value==""){
-                    formulario.txtEmail.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtTelefono.value==""){
-                    formulario.txtTelefono.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtDirecion.value==""){
-                    formulario.txtDirecion.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtUsuario.value==""){
-                    formulario.txtUsuario.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(existeUsuario()==""){
-                     formulario.txtUsuario.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtContrasenia.value==""){
-                    formulario.txtContrasenia.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else{
-                   
-                    return true;
-                    $("#complete").fadeOut();
-                }   
-                 alert(formulario.txtFecha.value);
-            }
-            
-            function validarFecha(fecha){
-                
-                var validacion = 0;
-                
-                var date = $("#fechaCliente").val();
-            
-                if(String(date)==""){
-                    validacion = 0;
-                
-                }else{
-                    validacion = 1;
-                    
-                }
-                
-                return validacion;
-            }
-           
-           function existeUsuario(){
-               
-               $.post('Controlador', {
-                   
-                action : 'existeUsuario',
-                usuario : formulario.txtUsuario.value
-            }
-      , function(responseText){
-				alert(responseText);
-			});
-               return reponseText;
-           }
-            
-            //Funciones para ver todos los clientes
-            
-
-            
-        </script>
+         <script type="text/javascript" src="js/admin.js"></script>
+       
     </head>
     <body>
                
@@ -278,6 +100,88 @@
         </div>
             
             <div id="FondoVerTodos">
+                
+                
+                        <div id="borrarForm" class="FondFrms">
+            
+            <form role="form" method="post" action="Controlador" id="borrarForm">
+                
+                <h2 id="preguntaBorrar">¿?</h2>
+                
+                     <input type="hidden" name="action" value="borraCliente">
+                  
+                     <input type="submit" value="Eliminar" name="btnEliminar" id="btnEliminar">
+                
+                     <input type="button" value="No" name="NoEliminar" id="btnNoEliminar">
+              
+             </form>
+            
+        </div>
+                
+                
+                           <div id="FondoEditarUno" class="FondFrms">
+            
+                
+                           <form role="form" method="post" action="Controlador" id="clienteForm" onsubmit="return validarFormCliente(this);">
+                    <img id="cerrarFormEditar" src="images/close.png">
+                
+                    <h3 class="titutoFrm">Editar cliente</h3>
+                
+                    <input type="hidden" name="action" value="agregarCliente">
+                    
+                    <input type="text" name="txtNombre" value="" placeholder="Nombre">
+                    <input type="text" name="txtApellidos" value="" placeholder="Apellidos">
+                    <input type="number" name="txtCedula" value="" placeholder="Cédula" min="1">
+                  
+                    <div id="contenedorFecha">
+                    
+                <h3>fecha de nacimiento:</h3>
+                   <input class="fechaForm" type="number" name="diaCliente" value="" placeholder="día" id="diaCliente" min="1" max="31">  
+                    <input class="fechaForm" type="number" name="mesCliente" value="" placeholder="mes" id="mesCliente" min="1" max="12">
+                   <input class="fechaForm" type="number" name="annioCliente" value="" placeholder="año" id="annioCliente" min="1900" max="2200">
+                       
+                    </div>
+                   
+                
+                    <input type="email" name="txtEmail" value="" placeholder="Correo">
+                    <input type="number" name="txtTelefono" value="" placeholder="Teléfono">
+                    <input type="text" name="txtDirecion" value="" placeholder="Dirección">
+                    <input type="text" name="txtUsuario" value="" placeholder="Usuario">
+                    <input type="text" name="txtContrasenia" value="" placeholder="Contraseña">
+                               
+                <div class="DivSlEditCliente">
+                    
+                    <p class="pSlEditCliente">Rol:</p>
+                    <select name="slRol"  class="SlEditCliente">
+            
+            <option value="administrador">Administrador</option>
+            <option value="cliente">Cliente</option>
+        
+                    </select>
+                               
+                  </div>                 
+                    
+                     <div class="DivSlEditCliente">           
+                   
+                         <p class="pSlEditCliente">Estado:</p>
+                        <select name="slActivo" class="SlEditCliente">
+
+                <option value="1">activado</option>
+                <option value="0">desactivado</option>
+
+                        </select>
+                    
+                    </div>
+                    
+                    <input type="submit" value="Guardar" class="btnGuardar">
+                       <h3 id="complete" class="frmAlertas">Complete todos los campos</h3>
+                        <h3 id="existe" class="frmAlertas">Error al guardar, usuario ya existe</h3>
+              
+             </form> 
+               
+            
+            </div>
+                
             
                 <img class="cerrarForm" src="images/close.png">
                 
@@ -323,9 +227,9 @@
                     <td><%= User.getTelefono()%></td>
                     <%-- Enlaces a las paginas de actualizar o eliminar--%>
                     <td>
-                        <a><img src="images/edit.png" class="btnOpciones"></a>
+                        <a><img src="images/edit.png" id="btnEditar" class="btnOpciones" alt="<%= User.getId()%>"></a>
                         
-                        <a><img src="images/delete.png" class="btnOpciones"></a>
+                        <a><img src="images/delete.png" id="btnBorrar" class="btnOpciones" alt="<%= User.getNombre()+" "+User.getApellidos()%>"></a>
                     </td>
                 </tr>
                 <%

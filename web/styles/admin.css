@@ -415,8 +415,7 @@ section{
 #FondoEditarUno{
     z-index: 0;
     display: block;
-    
-    
+    display: none;
 }
 
 #cerrarFormEditar{
@@ -425,6 +424,45 @@ section{
     width: 30px;
     margin-top: 2px;
     margin-right: 2px;
+}
+
+.DivSlEditCliente{
+    
+    text-align:left;
+    color: rgb(44, 62, 80);
+    width: 356px;
+    height: 31px;
+    border: 1px solid;
+    border-radius: 8px;
+    display: table;
+    margin: auto;
+    z-index: 10;
+    margin-top: 10px;
+    font-size: 1.5em;
+    font-family:inherit;
+    background: rgb(237, 237, 237);
+}
+
+.pSlEditCliente{
+    height: 32px;
+    text-align: center;
+    width: 178px;
+    position: absolute;
+    border-right: 1px solid;
+    color: rgb(44, 62, 80);
+}
+
+.SlEditCliente{
+    text-align: center;
+    padding-left: 25px;
+    float: right;
+    width: 178px;
+    height: 32px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-size: 1em;
+    border-style: none;
+    background: white;
 }
 
 @media screen and (max-width: 1050px){

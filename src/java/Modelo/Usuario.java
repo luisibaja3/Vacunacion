@@ -11,7 +11,7 @@ public class Usuario{
     private String correo;
     private String direccion;
     private String fechaNacimiento;
-    private int activo; //1 = activo, 2 = inactivo
+    private int activo; //1 = activo, 0 = inactivo
     private String rol;
     private int telefono;
 
