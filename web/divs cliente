@@ -1,0 +1,37 @@
+                <table border="1" style="margin: 0 auto;">
+                <tr>
+                     <td class="columna"><b>cédula</b></td>
+                    <td class="columna"><b>nombre</b></td>
+                    <td class="columna"><b>dirección</b></td>
+                    <td class="columna"><b>estado</b></td>
+                    <td class="columna"><b>opciones</b></td>
+                </tr>
+                <%-- Lista de todos los productos --%>
+                <%
+                            ArrayList<Usuario> lista = UsuarioBD.cargarClientes();
+                         
+                     for (Usuario User : lista) {
+                         String activoS = "";
+                                if(User.getActivo()==1){
+                                    activoS = "activado";
+                                }else{ 
+                                    activoS = "desactivado";
+                                }
+                %>
+                <tr>
+                    <td><%= User.getCedula()%></td>
+                    <td><%= User.getNombre()+" "+User.getApellidos()%></td>
+                    <td><%= User.getDireccion()%></td>
+                    <td><%= activoS%></td>
+                    <%-- Enlaces a las paginas de actualizar o eliminar--%>
+                    <td>
+                        <a><img src="images/edit.png" class="btnOpciones btnEditar" alt="<%= User.getId()%>"></a>
+                        
+                        <a><img src="images/delete.png" class="btnOpciones btnBorrar" alt="<%= User.getNombre()+" "+User.getApellidos()%>"></a>
+                    </td>
+                </tr>
+                <%
+                            }
+                %>
+
+            </table>

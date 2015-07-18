@@ -39,36 +39,39 @@
         <link rel="stylesheet" type="text/css" href="styles/admin.css">
         <link rel="stylesheet" type="text/css" href="styles/animate.css">
         <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-         <script type="text/javascript" src="js/admin.js"></script>
-       
+        <script type="text/javascript" src="js/admin.js"></script>
+        <script type="text/javascript" src="js/cliente.js"></script>
     </head>
     <body>
                
         <div id="salirDiv" class="FondFrms">
             
-            <form role="form" method="post" action="Controlador" id="salirForm">
+            <form role="form" method="post" action="Controlador" id="salirForm" class="formSiNo">
                 
-                <h2 id="preguntaSalir">¿<%=nombre%>, realmente desea salir del sistema?</h2>
+                <h2 id="preguntaSalir" class="preguntaSINO">¿<%=nombre%>, realmente desea salir del sistema?</h2>
                 
                      <input type="hidden" name="action" value="Logout">
                   
-                     <input type="submit" value="Salir" name="btn" id="Salir">
+                     <input class="btnPositivo" type="submit" value="Salir" name="btn" id="Salir">
                 
-                     <input type="button" value="No" name="Nosalir" id="noSalir">
+                     <input class="btnNegativo" type="button" value="No" name="Nosalir" id="noSalir">
               
              </form>
             
         </div>
-          
-        <div id="clienteDiv" class="FondFrms">
+
             
-            <form role="form" method="post" action="Controlador" id="clienteForm" onsubmit="return validarFormCliente(this);">
-                      <img class="cerrarForm" src="images/close.png">
-                <h3 class="titutoFrm">Clientes</h3>
+            <div class="divEntidades" id="divCliente">
+                  <img class="cerrarForm cerrarDivsEntidades" src="images/close.png" id="cerrarDivCliente">
+            
+                <div id="divAgregarCliente" class="FondFrms">
+                
+                
+                     <form role="form" method="post" action="Controlador" id="clienteForm" onsubmit="return validarFormCliente(this);">
                      
-                    <h3 id="VerTodosClientes">+ ver todos</h3>
+                    <img class="cerrarForm" src="images/close.png">
           
-                    <h3>agregar cliente: </h3>
+                     <h3 class="titutoFrm">Agregar cliente</h3>
                 
                     <input type="hidden" name="action" value="agregarCliente">
                     
@@ -76,15 +79,15 @@
                     <input type="text" name="txtApellidos" value="" placeholder="Apellidos">
                     <input type="number" name="txtCedula" value="" placeholder="Cédula" min="1">
                   
-                <div id="contenedorFecha">
+                    <div id="contenedorFecha">
                     
-                    <h3>fecha de nacimiento:</h3>
-                    <input class="fechaForm" type="number" name="diaCliente" value="" placeholder="día" id="diaCliente" min="1" max="31">  
+                        <h3>fecha de nacimiento:</h3>
+                   <input class="fechaForm" type="number" name="diaCliente" value="" placeholder="día" id="diaCliente" min="1" max="31">  
                     <input class="fechaForm" type="number" name="mesCliente" value="" placeholder="mes" id="mesCliente" min="1" max="12">
-                    <input class="fechaForm" type="number" name="annioCliente" value="" placeholder="año" id="annioCliente" min="1900" max="2200">
-                
-                </div>
-               
+                   <input class="fechaForm" type="number" name="annioCliente" value="" placeholder="año" id="annioCliente" min="1900" max="2200">
+                       
+                    </div>
+                   
                     <input type="email" name="txtEmail" value="" placeholder="Correo">
                     <input type="number" name="txtTelefono" value="" placeholder="Teléfono">
                     <input type="text" name="txtDirecion" value="" placeholder="Dirección">
@@ -96,34 +99,16 @@
                         <h3 id="existe" class="frmAlertas">Error al guardar, usuario ya existe</h3>
               
              </form>
-            
-        </div>
-            
-            <div id="FondoVerTodos">
                 
+                    
                 
-                        <div id="borrarForm" class="FondFrms">
-            
-            <form role="form" method="post" action="Controlador" id="borrarForm">
+                </div>
                 
-                <h2 id="preguntaBorrar">¿?</h2>
+                <div id="divEditarCliente" class="FondFrms">
                 
-                     <input type="hidden" name="action" value="borraCliente">
-                  
-                     <input type="submit" value="Eliminar" name="btnEliminar" id="btnEliminar">
-                
-                     <input type="button" value="No" name="NoEliminar" id="btnNoEliminar">
-              
-             </form>
-            
-        </div>
-                
-                
-                           <div id="FondoEditarUno" class="FondFrms">
-            
-                
-                           <form role="form" method="post" action="Controlador" id="clienteForm" onsubmit="return validarFormCliente(this);">
-                    <img id="cerrarFormEditar" src="images/close.png">
+                  <form role="form" method="post" action="Controlador" id="clienteForm" onsubmit="return validarFormCliente(this);">
+                   
+                     <img class="cerrarForm" src="images/close.png">
                 
                     <h3 class="titutoFrm">Editar cliente</h3>
                 
@@ -135,10 +120,10 @@
                   
                     <div id="contenedorFecha">
                     
-                <h3>fecha de nacimiento:</h3>
-                   <input class="fechaForm" type="number" name="diaCliente" value="" placeholder="día" id="diaCliente" min="1" max="31">  
+                    <h3>fecha de nacimiento:</h3>
+                    <input class="fechaForm" type="number" name="diaCliente" value="" placeholder="día" id="diaCliente" min="1" max="31">  
                     <input class="fechaForm" type="number" name="mesCliente" value="" placeholder="mes" id="mesCliente" min="1" max="12">
-                   <input class="fechaForm" type="number" name="annioCliente" value="" placeholder="año" id="annioCliente" min="1900" max="2200">
+                    <input class="fechaForm" type="number" name="annioCliente" value="" placeholder="año" id="annioCliente" min="1900" max="2200">
                        
                     </div>
                    
@@ -153,9 +138,9 @@
                     
                     <p class="pSlEditCliente">Rol:</p>
                     <select name="slRol"  class="SlEditCliente">
-            
-            <option value="administrador">Administrador</option>
-            <option value="cliente">Cliente</option>
+
+                    <option value="administrador">administrador</option>
+                    <option value="cliente">cliente</option>
         
                     </select>
                                
@@ -166,41 +151,50 @@
                          <p class="pSlEditCliente">Estado:</p>
                         <select name="slActivo" class="SlEditCliente">
 
-                <option value="1">activado</option>
-                <option value="0">desactivado</option>
+                        <option value="1">activado</option>
+                        <option value="0">desactivado</option>
 
                         </select>
                     
                     </div>
                     
                     <input type="submit" value="Guardar" class="btnGuardar">
-                       <h3 id="complete" class="frmAlertas">Complete todos los campos</h3>
+                        
+                        <h3 id="complete" class="frmAlertas">Complete todos los campos</h3>
                         <h3 id="existe" class="frmAlertas">Error al guardar, usuario ya existe</h3>
               
-             </form> 
-               
-            
-            </div>
+                    </form> 
                 
+                </div>
+                
+                <div id="divBorrarCliente" class="FondFrms">
             
-                <img class="cerrarForm" src="images/close.png">
+                <form role="form" method="post" action="Controlador" id="borrarForm" class="formSiNo">
+
+                    <h2 id="preguntaBorrar">¿?</h2>
+
+                         <input type="hidden" name="action" value="borraCliente">
+
+                         <input type="submit" value="Sí" name="btnEliminar" id="btnEliminar" class="btnPositivo">
+
+                         <input type="button" value="No" name="NoEliminar" id="btnNoEliminar" class="btnNegativo">
+
+                 </form>
+            
+                </div>
                 
                 <h1 id="tituloVerTodos">Clientes</h1>
                 
-                <h2 id="btnVolverAgregar">+ agregar clientes</h2>
+                <h2 id="btnAgregarClientes">+ agregar clientes</h2>
                             
                 <br>
+                
                 <table border="1" style="margin: 0 auto;">
                 <tr>
-                    <td class="columna"><b>cédula</b></td>
+                     <td class="columna"><b>cédula</b></td>
                     <td class="columna"><b>nombre</b></td>
-                    <td class="columna"><b>usuario</b></td>
-                    <td class="columna"><b>contraseña</b></td>
                     <td class="columna"><b>dirección</b></td>
-                    <td class="columna"><b>nacimiento</b></td>
                     <td class="columna"><b>estado</b></td>
-                    <td class="columna"><b>correo</b></td>
-                    <td class="columna"><b>teléfono</b></td>
                     <td class="columna"><b>opciones</b></td>
                 </tr>
                 <%-- Lista de todos los productos --%>
@@ -218,24 +212,18 @@
                 <tr>
                     <td><%= User.getCedula()%></td>
                     <td><%= User.getNombre()+" "+User.getApellidos()%></td>
-                    <td><%= User.getUsuario() %></td>
-                    <td><%= User.getContrasenia()%></td>
                     <td><%= User.getDireccion()%></td>
-                    <td><%= User.getFechaNacimiento()%></td>
                     <td><%= activoS%></td>
-                    <td><%= User.getCorreo()%></td>
-                    <td><%= User.getTelefono()%></td>
                     <%-- Enlaces a las paginas de actualizar o eliminar--%>
                     <td>
-                        <a><img src="images/edit.png" id="btnEditar" class="btnOpciones" alt="<%= User.getId()%>"></a>
+                        <a><img src="images/edit.png" class="btnOpciones btnEditar" alt="<%= User.getId()%>"></a>
                         
-                        <a><img src="images/delete.png" id="btnBorrar" class="btnOpciones" alt="<%= User.getNombre()+" "+User.getApellidos()%>"></a>
+                        <a><img src="images/delete.png" class="btnOpciones btnBorrar" alt="<%= User.getNombre()+" "+User.getApellidos()%>"></a>
                     </td>
                 </tr>
                 <%
                             }
                 %>
-
             </table>
             
             </div>
@@ -270,8 +258,6 @@
             <button class="btnsMenu" id="btnAbrirCitas">Citas +</button>
             
             
-            
-            
         </div>
         
         </div>
@@ -279,6 +265,7 @@
             
             <h1>Su usuario es: <%=usuario%></h1>
             <h2>Correo: <%=correo%></h2>
+                
         </section>
         
         <footer>
@@ -288,7 +275,7 @@
                         <img src="images/off.png" id="btnLogout">
                        
                    </div>
-            <h1 class="titulos" id="tituloInferior">Control de vacunación<img src="images/logo.png" id="iconvacuna"></h1>
+            <h1 class="titulos" id="tituloInferior">Control de vacunación <img src="images/logo.png" id="iconvacuna"></h1>
           
         </footer>
     </body>
