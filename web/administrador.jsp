@@ -67,7 +67,7 @@
                 <div id="divAgregarCliente" class="FondFrms">
                 
                 
-                     <form role="form" method="post" action="Controlador" id="clienteForm" onsubmit="return validarFormCliente(this);">
+                    <form role="form" method="post" id="clienteForm" onsubmit="return validarFormCliente(this);">
                      
                     <img class="cerrarForm" src="images/close.png">
           
@@ -94,9 +94,9 @@
                     <input type="text" name="txtUsuario" value="" placeholder="Usuario">
                     <input type="text" name="txtContrasenia" value="" placeholder="Contraseña">
              
-                    <input type="submit" value="Guardar" class="btnGuardar">
+                    <input type="submit" value="Guardar" class="btnGuardar" id='btnGuardarCliente'>
                        <h3 id="complete" class="frmAlertas">Complete todos los campos</h3>
-                        <h3 id="existe" class="frmAlertas">Error al guardar, usuario ya existe</h3>
+                        <h3 id="avisoAjax" class="frmAlertas">Guardando cliente...</h3>
               
              </form>
                 
@@ -106,9 +106,9 @@
                 
                 <div id="divEditarCliente" class="FondFrms">
                 
-                  <form role="form" method="post" action="Controlador" id="clienteForm" onsubmit="return validarFormCliente(this);">
+                  <form role="form" method="post" action="Controlador" id="clienteForm" onsubmit="return validarFormCliente(this)">
                    
-                     <img class="cerrarForm" src="images/close.png">
+                    <img class="cerrarForm" src="images/close.png">
                 
                     <h3 class="titutoFrm">Editar cliente</h3>
                 
