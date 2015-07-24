@@ -14,6 +14,12 @@ $(document).ready(function () {
                    $("#salirDiv").fadeIn();
                 });
                 
+                $("#noSalir").click(function(){
+                  
+                    $("#salirDiv").fadeOut();
+                    
+                });
+                
                 $(".cerrarDivsEntidades").click(function(){
                     $(".divEntidades").fadeOut();
                 })
@@ -33,7 +39,6 @@ $(document).ready(function () {
                 $("#btnConfiguraciones").click(function(){
                 
                     
-                    animate(".menu", 'fadeInRight');
                     $("#PanelMenu").fadeIn();
                     
                 });
@@ -42,7 +47,6 @@ $(document).ready(function () {
                 
                 function ocultarMenu(){
                 $("#PanelMenu").fadeOut();
-                    animate(".menu", 'fadeOutRight');
                     
                 }
                 

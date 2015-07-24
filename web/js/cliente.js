@@ -22,22 +22,53 @@ $(document).ready(function(){
                 });
                 
                 //borrar cliente
-    
+                
+                var pos = 0;
+                
                 $(".btnBorrar").click(function(){
+                    
+                    pos = "info"+$(this).attr("role");
                     
                     var nombreCliente = $(this).attr("alt");
                     $("#divBorrarCliente").fadeIn();
                     $("#preguntaBorrar").text("¿Eliminar a "+ nombreCliente +" del sistema?");
-           
+                    
                 });
-    
-         
-               
+                
+                $("#btnEliminar").click(function(){
+                    
+                   var cedula = $("#"+pos+"").attr("alt");
+                   
+        
+                   
+                   $.post('Controlador', {
+                                action: "borrarCliente",
+                                cedulaCliente: cedula
+                                
+			}, function(responseText) {
+				
+                                if(responseText==1){
+                                    
+                                        $("#tr"+pos+"").fadeOut();
+                                        $("#divBorrarCliente").fadeOut();
+                                        
+                                }else{
+                                    
+                                    alert("no se pudo borrar");
+                                    
+                                }
+                              
+                        
+			});  
+                    
+                });
+                        
             });
+            
             
             //Validacion del form cliente
             function validarFormCliente(formulario){
-            
+               
                 if(formulario.txtNombre.value==""){
                     formulario.txtNombre.focus();
                     $("#complete").fadeIn();
@@ -88,22 +119,20 @@ $(document).ready(function(){
                     $("#complete").fadeIn();
                     return false;
                     
-                }else if(existeUsuario()==""){
-                     formulario.txtUsuario.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
                 }else if(formulario.txtContrasenia.value==""){
                     formulario.txtContrasenia.focus();
                     $("#complete").fadeIn();
                     return false;
                     
                 }else{
-                   
-                    return true;
+                    
+                    var formCliente = formulario;
+                    guardarUsuario(formCliente);
                     $("#complete").fadeOut();
+
                 }   
-                 alert(formulario.txtFecha.value);
+                
+                
             }
             
             function validarFecha(fecha){
@@ -123,17 +152,21 @@ $(document).ready(function(){
                 return validacion;
             }
            
-           function existeUsuario(form){
+            function guardarUsuario(form){
                
-               $.post('Controlador', {
-                   
-                action : 'existeUsuario',
-                usuario : formulario.txtUsuario.value
-                   
-            }
-      , function(responseText){
-				alert(responseText);
-			});
-               return reponseText;
+               $("#avisoAjax").fadeIn();
+               
+            var formData = new FormData(form[0]);
+               
+                    $.post('Controlador', {
+                                data: formData,
+                                
+			}, function(responseText) {
+				$('#avisoAjax').text(responseText);
+			});  
+                        
+                
            }
+          
+        
             
