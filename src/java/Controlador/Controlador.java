@@ -8,6 +8,7 @@ package Controlador;
 import Modelo.Usuario;
 import Modelo.UsuarioBD;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,14 +45,14 @@ public class Controlador extends HttpServlet {
             this.logout(request, response);
         }else if (accion.equals("agregarCliente")){
             this.agregarCliente(request, response);
-        }else if(accion.equals("existeUsuario")){
-            this.existeUsuario();
         } else if(accion.equals("cargarClientes")){
             this.cargarClientes(request, response);
+        }else if(accion.equals("borrarCliente")){
+            this.borrarCliente(request, response);
         }
 
     }
-
+                
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        String usuario = request.getParameter("txtUser");
        String password = request.getParameter("txtPassword");
@@ -89,8 +90,11 @@ public class Controlador extends HttpServlet {
         response.sendRedirect("index.jsp");
     }
     
-    private void agregarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-           Usuario cliente = new Usuario();
+    protected void agregarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+        response.setContentType( "text/html; charset=iso-8859-1" );
+        PrintWriter out = response.getWriter();
+        
+        Usuario cliente = new Usuario();
         int mensaje = 0;
         
         if(UsuarioBD.existeUsuario(request.getParameter("txtUsuario"))==1){
@@ -109,26 +113,36 @@ public class Controlador extends HttpServlet {
         cliente.setActivo(1);
         cliente.setRol("cliente");
         
-           /* if (UsuarioBD.guardarUsuario(cliente)==0) {
-                 mensaje = 2; //error al guardar
+            if (UsuarioBD.guardarUsuario(cliente).equals("ok")) {
+                 mensaje = 3; //bien
             }else{
-                 mensaje = 3; //exito
-            }   */
+                 mensaje = 2; //mal
+            }   
         }
-        
-        response.sendRedirect("administrador.jsp?msg="+UsuarioBD.guardarUsuario(cliente)+"");
+       
+        out.println(mensaje);
      
     }
     
-    private String existeUsuario(){
-        
-        return "AJAX funciona";
-        
-    }
     
     private void cargarClientes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         
+        
+    }
+    
+   
+            
+    private void  borrarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        response.setContentType( "text/html; charset=iso-8859-1" );
+        PrintWriter out = response.getWriter();
+        
+        int cedula = Integer.parseInt(request.getParameter("cedulaCliente"));
+        
+       int estado = UsuarioBD.borrarUsuario(cedula);
+        
+         out.println(estado);
         
     }
     

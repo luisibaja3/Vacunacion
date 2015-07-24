@@ -105,7 +105,7 @@ public class UsuarioBD extends HttpServlet {
         
         try {
             //Nombre del procedimiento almacenado
-            String call = "{CALL guardarUsuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+            String call = "{CALL guardarUsuario(?,?,?,?,?,?,?,?,?,?,?)}";
             cn = ConexionBD.getConexion();
             cl = cn.prepareCall(call);
             cl.setInt(1, user.getCedula());
@@ -119,9 +119,6 @@ public class UsuarioBD extends HttpServlet {
             cl.setInt(9, user.getActivo());
             cl.setString(10, user.getRol());
             cl.setInt(11, user.getTelefono());
-            cl.setInt(12, 0);
-            cl.setInt(13, 0);
-            cl.setInt(14, 0);
             
             //La sentencia lo almacenamos en un resulset
             cl.executeQuery();
@@ -195,5 +192,45 @@ public class UsuarioBD extends HttpServlet {
         }
         return lista;
     }
+       
+        public static int borrarUsuario(int cedula) {
+        
+            Connection cn = null;
+            CallableStatement cl = null;
+            int exito = 0;
+        
+        try {
+            //Nombre del procedimiento almacenado
+            String call = "{CALL eliminarUsuario(?)}";
+            cn = ConexionBD.getConexion();
+            cl = cn.prepareCall(call);
+            cl.setInt(1, cedula);
+            
+            exito = 1;
+            //La sentencia lo almacenamos en un resulset
+            cl.executeQuery();
+            //Consultamos si hay datos para recorrerlo
+            //e insertarlo en nuestro array
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+
+        } catch (SQLException e) {
+            exito = 0;
+            e.printStackTrace();
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+            
+        } catch (Exception e) {
+             exito = 0;
+            System.out.print(e);
+            e.printStackTrace();
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+        }
+            
+            return exito;
+            
+        }
+       
    
 }

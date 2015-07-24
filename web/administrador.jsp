@@ -66,8 +66,9 @@
             
                 <div id="divAgregarCliente" class="FondFrms">
                 
+                    <!--######################Agregar clientes##################################-->
                 
-                    <form role="form" method="post" id="clienteForm" onsubmit="return validarFormCliente(this);">
+                    <form role="form" method="post" id="clienteForm" onsubmit="return validarFormCliente(this)">
                      
                     <img class="cerrarForm" src="images/close.png">
           
@@ -173,9 +174,9 @@
 
                     <h2 id="preguntaBorrar">¿?</h2>
 
-                         <input type="hidden" name="action" value="borraCliente">
+                        
 
-                         <input type="submit" value="Sí" name="btnEliminar" id="btnEliminar" class="btnPositivo">
+                         <input type="button" value="Sí" name="btnEliminar" id="btnEliminar" class="btnPositivo">
 
                          <input type="button" value="No" name="NoEliminar" id="btnNoEliminar" class="btnNegativo">
 
@@ -200,7 +201,7 @@
                 <%-- Lista de todos los productos --%>
                 <%
                             ArrayList<Usuario> lista = UsuarioBD.cargarClientes();
-                         
+                           int conteo = 1;
                      for (Usuario User : lista) {
                          String activoS = "";
                                 if(User.getActivo()==1){
@@ -209,20 +210,22 @@
                                     activoS = "desactivado";
                                 }
                 %>
-                <tr>
+                <tr id="tr<%=conteo%>">
                     <td><%= User.getCedula()%></td>
                     <td><%= User.getNombre()+" "+User.getApellidos()%></td>
                     <td><%= User.getDireccion()%></td>
                     <td><%= activoS%></td>
                     <%-- Enlaces a las paginas de actualizar o eliminar--%>
                     <td>
-                        <a><img src="images/edit.png" class="btnOpciones btnEditar" alt="<%= User.getId()%>"></a>
+                        <a><img src="images/edit.png" class="btnOpciones btnEditar"></a>
                         
-                        <a><img src="images/delete.png" class="btnOpciones btnBorrar" alt="<%= User.getNombre()+" "+User.getApellidos()%>"></a>
+                        <a><img src="images/delete.png" class="btnOpciones btnBorrar" alt="<%= User.getNombre()+" "+User.getApellidos()%>" role="<%=conteo%>"></a>
+                        
+                        <input type="hidden" alt="<%= User.getCedula()%>" id="info<%=conteo%>">
                     </td>
                 </tr>
                 <%
-                            }
+                      conteo++;     }
                 %>
             </table>
             
@@ -237,7 +240,7 @@
             <form method="post" action="Controlador" id="frmBuscar">
             <input type="hidden" name="action" value="Buscar" />
             <input type="text" name="txtBuscar" value="" id="txtBuscar" placeholder="Buscar">
-                <input type="submit" value="" name="btnBuscar" id="btnBuscar">   
+                <input type="button" value="" name="btnBuscar" id="btnBuscar">   
                 <input type="image" name="imgBuscar" src="images/buscarIcon.png" id="buscaricon">
             </form>
            
