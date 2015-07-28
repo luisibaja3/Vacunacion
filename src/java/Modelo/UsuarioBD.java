@@ -206,13 +206,14 @@ public class UsuarioBD extends HttpServlet {
             cl = cn.prepareCall(call);
             cl.setInt(1, cedula);
             
-            exito = 1;
+       
             //La sentencia lo almacenamos en un resulset
             cl.executeQuery();
             //Consultamos si hay datos para recorrerlo
             //e insertarlo en nuestro array
             ConexionBD.cerrarCall(cl);
             ConexionBD.cerrarConexion(cn);
+            exito = 1;
 
         } catch (SQLException e) {
             exito = 0;

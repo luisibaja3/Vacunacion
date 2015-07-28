@@ -24,10 +24,12 @@ $(document).ready(function(){
                 //borrar cliente
                 
                 var pos = 0;
+                var posBorrar = 0;
                 
                 $(".btnBorrar").click(function(){
                     
                     pos = "info"+$(this).attr("role");
+                    posBorrar = $(this).attr("role");
                     
                     var nombreCliente = $(this).attr("alt");
                     $("#divBorrarCliente").fadeIn();
@@ -46,127 +48,140 @@ $(document).ready(function(){
                                 cedulaCliente: cedula
                                 
 			}, function(responseText) {
-				
-                                if(responseText==1){
+                            	
+                                alert(responseText);
                                     
-                                        $("#tr"+pos+"").fadeOut();
+                                    
+                                    
+                                    var quitar = $("#tr"+posBorrar);
+                                    
+                                    alert(quitar);
+                                    
+                                        
                                         $("#divBorrarCliente").fadeOut();
                                         
-                                }else{
-                                    
-                                    alert("no se pudo borrar");
-                                    
-                                }
+                            
                               
                         
 			});  
                     
                 });
+                
+                $("#btnGuardarCliente").click(function(){
+                    
+                    if($("#GuardarClienteForm input[name = 'txtNombre']").val() == ""){
+                        
+                    $("#GuardarClienteForm input[name = 'txtNombre']").focus();
+                    $("#complete").fadeIn();
+                        
+                    }else  if($("#GuardarClienteForm input[name = 'txtApellidos']").val() == ""){
+                        
+                    $("#GuardarClienteForm input[name = 'txtApellidos']").focus();
+                    $("#complete").fadeIn();
+                        
+                    }else if($("#GuardarClienteForm input[name = 'txtCedula']").val() == ""){
+                        
+                    $("#GuardarClienteForm input[name = 'txtCedula']").focus();
+                    $("#complete").fadeIn();
+                        
+                    }else if($("#contenedorFecha input[name = 'diaCliente']").val() == ""){
+                        
+                    $("#contenedorFecha input[name = 'diaCliente']").focus();
+                    $("#complete").fadeIn();
+                        
+                    }else if($("#contenedorFecha input[name = 'mesCliente']").val() == ""){
+                        
+                    $("#contenedorFecha input[name = 'mesCliente']").focus();
+                    $("#complete").fadeIn();
+                        
+                    }else if($("#contenedorFecha input[name = 'annioCliente']").val() == ""){
+                        
+                    $("#contenedorFecha input[name = 'annioCliente']").focus();
+                    $("#complete").fadeIn();
+                        
+                    }else if($("#GuardarClienteForm input[name = 'txtEmail']").val() == ""){
+                        
+                    $("#GuardarClienteForm input[name = 'txtEmail']").focus();
+                    $("#complete").fadeIn();
+                        
+                    }else if($("#GuardarClienteForm input[name = 'txtTelefono']").val() == ""){
+                        
+                    $("#GuardarClienteForm input[name = 'txtTelefono']").focus();
+                    $("#complete").fadeIn();
+                        
+                    }else if($("#GuardarClienteForm input[name = 'txtDirecion']").val() == ""){
+                        
+                    $("#GuardarClienteForm input[name = 'txtDirecion']").focus();
+                    $("#complete").fadeIn();
+                        
+                    }else if($("#GuardarClienteForm input[name = 'txtUsuario']").val() == ""){
+                        
+                    $("#GuardarClienteForm input[name = 'txtUsuario']").focus();
+                    $("#complete").fadeIn();
+                        
+                    }else if($("#GuardarClienteForm input[name = 'txtContrasenia']").val() == ""){
+                        
+                    $("#GuardarClienteForm input[name = 'txtContrasenia']").focus();
+                    $("#complete").fadeIn();
+                        
+                    }else{
+                        
+                         $("#complete").fadeOut();
+                       guardarUsuario();
+                        
+                    }
+               });
                         
             });
             
-            
-            //Validacion del form cliente
-            function validarFormCliente(formulario){
-               
-                if(formulario.txtNombre.value==""){
-                    formulario.txtNombre.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtApellidos.value==""){
-                    formulario.txtApellidos.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtCedula.value==""){
-                    formulario.txtCedula.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.diaCliente.value==""){
-                    formulario.diaCliente.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.mesCliente.value==""){
-                    formulario.mesCliente.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.annioCliente.value==""){
-                    formulario.annioCliente.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtEmail.value==""){
-                    formulario.txtEmail.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtTelefono.value==""){
-                    formulario.txtTelefono.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtDirecion.value==""){
-                    formulario.txtDirecion.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtUsuario.value==""){
-                    formulario.txtUsuario.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else if(formulario.txtContrasenia.value==""){
-                    formulario.txtContrasenia.focus();
-                    $("#complete").fadeIn();
-                    return false;
-                    
-                }else{
-                    
-                    var formCliente = formulario;
-                    guardarUsuario(formCliente);
-                    $("#complete").fadeOut();
-
-                }   
-                
-                
-            }
-            
-            function validarFecha(fecha){
-                
-                var validacion = 0;
-                
-                var date = $("#fechaCliente").val();
-            
-                if(String(date)==""){
-                    validacion = 0;
-                
-                }else{
-                    validacion = 1;
-                    
-                }
-                
-                return validacion;
-            }
-           
-            function guardarUsuario(form){
+            function guardarUsuario(){
                
                $("#avisoAjax").fadeIn();
+               $("#avisoAjax").text("Guardando...");
+               $("#avisoAjax").css("color","#4a3e3e");
                
-            var formData = new FormData(form[0]);
+            var formData = $("#GuardarClienteForm").serialize();
                
-                    $.post('Controlador', {
-                                data: formData,
+                    $.ajax({
+                        url: 'Controlador',//Url a donde enviaremos los datos
+			type: 'POST',// Tipo de envio 
+			dataType: 'html', //Tipo de Respuesta
+			data: formData //Serializamos el formulario
+			})
+			.done(function(data) {//Cuando nuestra función finalice, recuperamos la respuesta
+                            if(data == "1"){
                                 
-			}, function(responseText) {
-				$('#avisoAjax').text(responseText);
-			});  
+                                $("#avisoAjax").text("Error al guardar");
+                                $("#avisoAjax").css("color","red");
+                            }else if(data == "2"){
+                                
+                                $("#avisoAjax").text("El usuario ya existe");
+                                $("#avisoAjax").css("color","blue");
+                                
+                            }else if(data.length>3){
+                                
+                                $("#avisoAjax").text("!Guardado con éxito¡");
+                                $("#avisoAjax").css("color","green");
+                                
+                                $("#tblClientes").append(data);
+                                
+                                limpiarFormlientes();
+                                
+                            }
+                                
+			});
                         
                 
            }
           
+           function limpiarFormlientes(){
+               
+               $("#GuardarClienteForm input").each(function(){
+                  
+                   $(this).text("");
+                   
+               });
+               
+           };
         
             

@@ -68,7 +68,7 @@
                 
                     <!--######################Agregar clientes##################################-->
                 
-                    <form role="form" method="post" id="clienteForm" onsubmit="return validarFormCliente(this)">
+                    <form role="form" method="post" id="GuardarClienteForm" class="clienteForm" onsubmit="return validarFormCliente(this)">
                      
                     <img class="cerrarForm" src="images/close.png">
           
@@ -95,7 +95,7 @@
                     <input type="text" name="txtUsuario" value="" placeholder="Usuario">
                     <input type="text" name="txtContrasenia" value="" placeholder="Contraseña">
              
-                    <input type="submit" value="Guardar" class="btnGuardar" id='btnGuardarCliente'>
+                    <input type="button" value="Guardar" class="btnGuardar" id='btnGuardarCliente'>
                        <h3 id="complete" class="frmAlertas">Complete todos los campos</h3>
                         <h3 id="avisoAjax" class="frmAlertas">Guardando cliente...</h3>
               
@@ -107,7 +107,7 @@
                 
                 <div id="divEditarCliente" class="FondFrms">
                 
-                  <form role="form" method="post" action="Controlador" id="clienteForm" onsubmit="return validarFormCliente(this)">
+                  <form role="form" method="post" action="Controlador" class="clienteForm" onsubmit="return validarFormCliente(this)">
                    
                     <img class="cerrarForm" src="images/close.png">
                 
@@ -190,7 +190,7 @@
                             
                 <br>
                 
-                <table border="1" style="margin: 0 auto;">
+                <table border="1" style="margin: 0 auto;" id="tblClientes">
                 <tr>
                      <td class="columna"><b>cédula</b></td>
                     <td class="columna"><b>nombre</b></td>
@@ -198,7 +198,7 @@
                     <td class="columna"><b>estado</b></td>
                     <td class="columna"><b>opciones</b></td>
                 </tr>
-                <%-- Lista de todos los productos --%>
+                
                 <%
                             ArrayList<Usuario> lista = UsuarioBD.cargarClientes();
                            int conteo = 1;

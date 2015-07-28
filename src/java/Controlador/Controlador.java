@@ -9,6 +9,7 @@ import Modelo.Usuario;
 import Modelo.UsuarioBD;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -95,10 +96,10 @@ public class Controlador extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         Usuario cliente = new Usuario();
-        int mensaje = 0;
+        String mensaje = "0";
         
         if(UsuarioBD.existeUsuario(request.getParameter("txtUsuario"))==1){
-            mensaje = 1; //ya existe el usuario
+            mensaje = "1"; //ya existe el usuario
         }else{
      
         cliente.setNombre(request.getParameter("txtNombre"));
@@ -114,9 +115,10 @@ public class Controlador extends HttpServlet {
         cliente.setRol("cliente");
         
             if (UsuarioBD.guardarUsuario(cliente).equals("ok")) {
-                 mensaje = 3; //bien
+                 mensaje = cargarTablaCliente();
+                 
             }else{
-                 mensaje = 2; //mal
+                 mensaje = "2"; //mal
             }   
         }
        
@@ -146,4 +148,29 @@ public class Controlador extends HttpServlet {
         
     }
     
+    private String cargarTablaCliente(){
+
+        String html = "<h2>Hola</h2>";
+        int conteo = 1;
+        ArrayList<Usuario> lista = UsuarioBD.cargarClientes();
+                           
+                   for (Usuario User : lista) {
+                         String activoS = "";
+                                if(User.getActivo()==1){
+                                    activoS = "activado";
+                                }else{ 
+                                    activoS = "desactivado";
+                                }
+                   html = "<tr id="+conteo+"><td>"+User.getCedula()+"</td><td>"+User.getNombre()+" "+User.getApellidos()+"</td>";
+                   html += "<td>"+User.getDireccion()+"</td>"; 
+                   html += "<td>"+activoS+"</td>";
+                   html += "<td><a><img src='images/edit.png' class='btnOpciones btnEditar'></a>";
+                   html += "<a><img src='images/delete.png' class='btnOpciones btnBorrar' alt='"+User.getNombre()+" "+User.getApellidos()+"' role='"+conteo+"'></a>";
+                   html += "<input type='hidden' alt='"+User.getCedula()+"' id='info"+conteo+"'></td></tr>";
+                
+                      conteo++; 
+                     }
+                
+        return html;
+    }
 }

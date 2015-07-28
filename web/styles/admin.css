@@ -302,7 +302,7 @@ box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.75);
     width: 300px;
 }
 
-#clienteForm{
+.clienteForm{
     display: table;
     margin: auto;
     margin-top: 80px;
@@ -313,7 +313,7 @@ box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.75);
     width: 480px;
 }
 
-#clienteForm input{
+.clienteForm input{
     text-align: center;
     color: rgb(44, 62, 80);
     width: 350px;
