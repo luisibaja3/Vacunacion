@@ -48,7 +48,7 @@ $(document).ready(function(){
 			}, function(responseText) {
                         
                                 $("#divBorrarCliente").fadeOut();
-                                $("#"+posBorrar+"").fadeOut();
+                                $("#tblClientes #"+posBorrar+"").fadeOut();
                         });  
                     
                 });
@@ -152,9 +152,11 @@ $(document).ready(function(){
                                 $("#avisoAjax").text("!Guardado con éxito¡");
                                 $("#avisoAjax").css("color","green");
                                 
+                                limpiarFormClientes();
+                               
                                 $("#tblClientes").append(data);
                                 
-                                limpiarFormClientes();
+                                
                                 
                             }
                                 
@@ -165,17 +167,17 @@ $(document).ready(function(){
           
            function limpiarFormClientes(){
                
-                    $("#GuardarClienteForm input[name = 'txtNombre']").text("");
-                    $("#GuardarClienteForm input[name = 'txtApellidos']").text("");
-                    $("#GuardarClienteForm input[name = 'txtCedula']").text("");
-                    $("#contenedorFecha input[name = 'diaCliente']").text("");
-                    $("#contenedorFecha input[name = 'mesCliente']").text("");
-                    $("#contenedorFecha input[name = 'annioCliente']").text("");
-                    $("#GuardarClienteForm input[name = 'txtEmail']").text("");
-                    $("#GuardarClienteForm input[name = 'txtTelefono']").text("");
-                    $("#GuardarClienteForm input[name = 'txtDirecion']").text("");
-                    $("#GuardarClienteForm input[name = 'txtUsuario']").text("");
-                    $("#GuardarClienteForm input[name = 'txtContrasenia']").text("");
+                    $("#GuardarClienteForm input[name = 'txtNombre']").val("");
+                    $("#GuardarClienteForm input[name = 'txtApellidos']").val("");
+                    $("#GuardarClienteForm input[name = 'txtCedula']").val("");
+                    $("#contenedorFecha input[name = 'diaCliente']").val("");
+                    $("#contenedorFecha input[name = 'mesCliente']").val("");
+                    $("#contenedorFecha input[name = 'annioCliente']").val("");
+                    $("#GuardarClienteForm input[name = 'txtEmail']").val("");
+                    $("#GuardarClienteForm input[name = 'txtTelefono']").val("");
+                    $("#GuardarClienteForm input[name = 'txtDirecion']").val("");
+                    $("#GuardarClienteForm input[name = 'txtUsuario']").val("");
+                    $("#GuardarClienteForm input[name = 'txtContrasenia']").val("");
                
            };
         
