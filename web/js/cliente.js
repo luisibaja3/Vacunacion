@@ -13,7 +13,7 @@ $(document).ready(function(){
 
                 //Abrir editar cliente
                 
-                $(".btnEditar").click(function(){
+                $('#tblClientes').on('click', '.btnEditar', function(){
                     
                     var idCliente = "";
                     idCliente = $(this).attr("alt");
@@ -23,13 +23,13 @@ $(document).ready(function(){
                 
                 //borrar cliente
                 
-                var pos = 0;
-                var posBorrar = 0;
+                var pos = "";
+                var posBorrar = "";
                 
-                $(".btnBorrar").click(function(){
+                $('#tblClientes').on('click', '.btnBorrar', function(){
                     
                     pos = "info"+$(this).attr("role");
-                    posBorrar = $(this).attr("role");
+                    posBorrar = "tr"+$(this).attr("role");
                     
                     var nombreCliente = $(this).attr("alt");
                     $("#divBorrarCliente").fadeIn();
@@ -38,32 +38,18 @@ $(document).ready(function(){
                 });
                 
                 $("#btnEliminar").click(function(){
-                    
+                
                    var cedula = $("#"+pos+"").attr("alt");
-                   
         
-                   
                    $.post('Controlador', {
                                 action: "borrarCliente",
                                 cedulaCliente: cedula
                                 
 			}, function(responseText) {
-                            	
-                                alert(responseText);
-                                    
-                                    
-                                    
-                                    var quitar = $("#tr"+posBorrar);
-                                    
-                                    alert(quitar);
-                                    
-                                        
-                                        $("#divBorrarCliente").fadeOut();
-                                        
-                            
-                              
                         
-			});  
+                                $("#divBorrarCliente").fadeOut();
+                                $("#"+posBorrar+"").fadeOut();
+                        });  
                     
                 });
                 
@@ -145,27 +131,30 @@ $(document).ready(function(){
                     $.ajax({
                         url: 'Controlador',//Url a donde enviaremos los datos
 			type: 'POST',// Tipo de envio 
-			dataType: 'html', //Tipo de Respuesta
+			dataType: 'text', //Tipo de Respuesta
 			data: formData //Serializamos el formulario
 			})
 			.done(function(data) {//Cuando nuestra función finalice, recuperamos la respuesta
-                            if(data == "1"){
+           
+                            if(data.length==3){
                                 
                                 $("#avisoAjax").text("Error al guardar");
                                 $("#avisoAjax").css("color","red");
-                            }else if(data == "2"){
+                                
+                            }else if(data.length== 4){
                                 
                                 $("#avisoAjax").text("El usuario ya existe");
                                 $("#avisoAjax").css("color","blue");
+                                $("#GuardarClienteForm input[name = 'txtUsuario']").focus();
                                 
-                            }else if(data.length>3){
+                            }else if(data.length>6){
                                 
                                 $("#avisoAjax").text("!Guardado con éxito¡");
                                 $("#avisoAjax").css("color","green");
                                 
                                 $("#tblClientes").append(data);
                                 
-                                limpiarFormlientes();
+                                limpiarFormClientes();
                                 
                             }
                                 
@@ -174,13 +163,19 @@ $(document).ready(function(){
                 
            }
           
-           function limpiarFormlientes(){
+           function limpiarFormClientes(){
                
-               $("#GuardarClienteForm input").each(function(){
-                  
-                   $(this).text("");
-                   
-               });
+                    $("#GuardarClienteForm input[name = 'txtNombre']").text("");
+                    $("#GuardarClienteForm input[name = 'txtApellidos']").text("");
+                    $("#GuardarClienteForm input[name = 'txtCedula']").text("");
+                    $("#contenedorFecha input[name = 'diaCliente']").text("");
+                    $("#contenedorFecha input[name = 'mesCliente']").text("");
+                    $("#contenedorFecha input[name = 'annioCliente']").text("");
+                    $("#GuardarClienteForm input[name = 'txtEmail']").text("");
+                    $("#GuardarClienteForm input[name = 'txtTelefono']").text("");
+                    $("#GuardarClienteForm input[name = 'txtDirecion']").text("");
+                    $("#GuardarClienteForm input[name = 'txtUsuario']").text("");
+                    $("#GuardarClienteForm input[name = 'txtContrasenia']").text("");
                
            };
         
