@@ -96,10 +96,10 @@ public class Controlador extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         Usuario cliente = new Usuario();
-        String mensaje = "0";
+        String mensaje = "";
         
         if(UsuarioBD.existeUsuario(request.getParameter("txtUsuario"))==1){
-            mensaje = "1"; //ya existe el usuario
+            mensaje = "exi"; //ya existe el usuario
         }else{
      
         cliente.setNombre(request.getParameter("txtNombre"));
@@ -118,7 +118,7 @@ public class Controlador extends HttpServlet {
                  mensaje = cargarTablaCliente();
                  
             }else{
-                 mensaje = "2"; //mal
+                 mensaje = "er"; //mal
             }   
         }
        
@@ -161,12 +161,12 @@ public class Controlador extends HttpServlet {
                                 }else{ 
                                     activoS = "desactivado";
                                 }
-                   html = "<tr id="+conteo+"><td>"+User.getCedula()+"</td><td>"+User.getNombre()+" "+User.getApellidos()+"</td>";
+                   html = "<tr id='tr"+conteo+"'><td>"+User.getCedula()+"</td><td>"+User.getNombre()+" "+User.getApellidos()+"</td>";
                    html += "<td>"+User.getDireccion()+"</td>"; 
                    html += "<td>"+activoS+"</td>";
                    html += "<td><a><img src='images/edit.png' class='btnOpciones btnEditar'></a>";
-                   html += "<a><img src='images/delete.png' class='btnOpciones btnBorrar' alt='"+User.getNombre()+" "+User.getApellidos()+"' role='"+conteo+"'></a>";
-                   html += "<input type='hidden' alt='"+User.getCedula()+"' id='info"+conteo+"'></td></tr>";
+                   html += "<a><img src='images/delete.png' class='btnOpciones btnBorrar' alt='"+User.getNombre()+" "+User.getApellidos()+"' role="+conteo+"></a>";
+                   html += "<input type='hidden' alt="+User.getCedula()+" id=info"+conteo+"></td></tr>";
                 
                       conteo++; 
                      }
