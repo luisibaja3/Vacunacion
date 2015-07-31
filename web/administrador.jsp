@@ -62,10 +62,60 @@
 
             
             <div class="divEntidades" id="divCliente">
-                  <img class="cerrarForm cerrarDivsEntidades" src="images/close.png" id="cerrarDivCliente">
+                  
+                <img class="cerrarForm cerrarDivsEntidades" src="images/close.png" id="cerrarDivCliente">
+                  
+                  
+                  <div id="divVerClienteInfo" class="FondFrms">
+                
+                    <div id="contenedorInfo">
+                        
+                        <img class="btnEditDos" src="images/edit.png">
+                        
+                        <img class="cerrarForm" src="images/close.png" id="cerrarDivCliente">
+                        
+                        <br>
+                        
+                        <h3 class="titutoInfoCliente"></h3>
+                        
+                    <table border="0">
+                     
+                        <tr>
+                            <td><b>Cédula:</b></td><b><td id="tdCedulaCliente"></td></b>
+                        </tr>
+                        <tr>
+                            <td><b>Nacimiento: </b></td><td id="tdNacimientoCliente"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Correo: </b></td><td id="tdCorreoCliente"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Dirección: </b></td><td id="tdDireccionCliente"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Teléfono:</b> </td><td id="tdTelefonoCliente"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Usuario:</b> </td><td id="tdUsuarioCliente"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Contraseña: </b></td><td id="tdContrasenaCliente"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Activo: </b></td><td id="tdEstadoCliente"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Rol: </b></td><td id="tdRolCliente"></td>
+                        </tr>
+                    
+                    </table>
+                
+                    </div>
+                    
+                </div>
             
                 <div id="divAgregarCliente" class="FondFrms">
-                
+                GuardarClienteForm
                     <!--######################Agregar clientes##################################-->
                 
                     <form role="form" method="post" id="GuardarClienteForm" class="clienteForm" onsubmit="return validarFormCliente(this)">
@@ -107,19 +157,19 @@
                 
                 <div id="divEditarCliente" class="FondFrms">
                 
-                  <form role="form" method="post" action="Controlador" class="clienteForm" onsubmit="return validarFormCliente(this)">
+                    <form role="form" method="post" action="Controlador" id="FormEditarCliente" class="clienteForm" onsubmit="return validarFormCliente(this)">
                    
                     <img class="cerrarForm" src="images/close.png">
                 
                     <h3 class="titutoFrm">Editar cliente</h3>
                 
-                    <input type="hidden" name="action" value="agregarCliente">
+                    <input type="hidden" name="action" value="editarCliente">
                     
                     <input type="text" name="txtNombre" value="" placeholder="Nombre">
                     <input type="text" name="txtApellidos" value="" placeholder="Apellidos">
                     <input type="number" name="txtCedula" value="" placeholder="Cédula" min="1">
                   
-                    <div id="contenedorFecha">
+                    <div id="contenedorFecha" class="fechaEditarCliente">
                     
                     <h3>fecha de nacimiento:</h3>
                     <input class="fechaForm" type="number" name="diaCliente" value="" placeholder="día" id="diaCliente" min="1" max="31">  
@@ -135,29 +185,31 @@
                     <input type="text" name="txtUsuario" value="" placeholder="Usuario">
                     <input type="text" name="txtContrasenia" value="" placeholder="Contraseña">
                                
-                <div class="DivSlEditCliente">
+                  <div class="DivSlEditCliente">
                     
                     <p class="pSlEditCliente">Rol:</p>
-                    <select name="slRol"  class="SlEditCliente">
+                   
+                    <select name="slRol"  class="SlEditCliente selectRol">
 
-                    <option value="administrador">administrador</option>
                     <option value="cliente">cliente</option>
+                    <option value="administrador">administrador</option>
         
                     </select>
                                
                   </div>                 
                     
-                     <div class="DivSlEditCliente">           
+                  <div class="DivSlEditCliente">           
                    
                          <p class="pSlEditCliente">Estado:</p>
-                        <select name="slActivo" class="SlEditCliente">
+                       
+                        <select name="slActivo" class="SlEditCliente selectEstado">
 
                         <option value="1">activado</option>
                         <option value="0">desactivado</option>
 
                         </select>
                     
-                    </div>
+                  </div>
                     
                     <input type="submit" value="Guardar" class="btnGuardar">
                         
@@ -192,11 +244,11 @@
                 
                 <table border="1" style="margin: 0 auto;" id="tblClientes">
                 <tr>
-                     <td class="columna"><b>cédula</b></td>
-                    <td class="columna"><b>nombre</b></td>
-                    <td class="columna"><b>dirección</b></td>
-                    <td class="columna"><b>estado</b></td>
-                    <td class="columna"><b>opciones</b></td>
+                     <td class="columna"><b>Cédula</b></td>
+                    <td class="columna"><b>Nombre</b></td>
+                    <td class="columna"><b>Dirección</b></td>
+                    <td class="columna"><b>Estado</b></td>
+                    <td class="columna"><b>Opciones</b></td>
                 </tr>
                 
                 <%
@@ -217,11 +269,37 @@
                     <td><%= activoS%></td>
                     <%-- Enlaces a las paginas de actualizar o eliminar--%>
                     <td>
-                        <a><img src="images/edit.png" class="btnOpciones btnEditar"></a>
+                        
+                        <a><img src="images/infoIcon.png" class="btnOpciones btnVerInfoCliente" role="<%=conteo%>"></a>
+                        
+                        <a><img src="images/edit.png" class="btnOpciones btnEditar" role="<%=conteo%>"></a>
                         
                         <a><img src="images/delete.png" class="btnOpciones btnBorrar" alt="<%= User.getNombre()+" "+User.getApellidos()%>" role="<%=conteo%>"></a>
                         
-                        <input type="hidden" alt="<%= User.getCedula()%>" id="info<%=conteo%>">
+                        <input type="hidden" alt="<%= User.getId()%>" id="idUser<%=conteo%>">
+                        
+                        <input type="hidden" alt="<%= User.getCedula()%>" id="cedulaUser<%=conteo%>">
+                        
+                        <input type="hidden" alt="<%= User.getNombre()%>" id="nombreUser<%=conteo%>">
+                        
+                        <input type="hidden" alt="<%= User.getApellidos()%>" id="apellidosUser<%=conteo%>">
+                        
+                        <input type="hidden" alt="<%= User.getUsuario()%>" id="usuarioUser<%=conteo%>">
+                        
+                        <input type="hidden" alt="<%= User.getContrasenia()%>" id="contraseniaUser<%=conteo%>">
+                        
+                        <input type="hidden" alt="<%= User.getCorreo()%>" id="correoUser<%=conteo%>">
+                        
+                        <input type="hidden" alt="<%= User.getDireccion()%>" id="direccionUser<%=conteo%>">
+                        
+                        <input type="hidden" alt="<%= User.getFechaNacimiento()%>" id="fechaNacimientoUser<%=conteo%>">
+                        
+                        <input type="hidden" alt="<%= activoS%>" id="activoUser<%=conteo%>">
+                        
+                        <input type="hidden" alt="<%= User.getRol()%>" id="rolUser<%=conteo%>">
+                        
+                        <input type="hidden" alt="<%= User.getTelefono()%>" id="telefonoUser<%=conteo%>">
+                        
                     </td>
                 </tr>
                 <%
