@@ -2,14 +2,42 @@
 
 $(document).ready(function(){
 
+                var posUser = "";
+                var posQuitar = "";
+    
                 $("#btnAbrirClientes").click(function() {
                    $("#divCliente").fadeIn();
                 });
+    
+                
     
                 $("#btnAgregarClientes").click(function(){ 
                     $("#divAgregarCliente").fadeIn()
                 
                 });   
+    
+    
+                //Abrir toda la información del cliente
+                 $('#tblClientes').on('click', '.btnVerInfoCliente', function(){
+                     
+                     posUser = $(this).attr("role");
+                     
+                        $(".titutoInfoCliente").text($("#"+"nombreUser"+posUser+"").attr("alt")+" "+$("#"+"apellidosUser"+posUser+"").attr("alt"));
+                     
+                        $("#tdCedulaCliente").text($("#"+"cedulaUser"+posUser+"").attr("alt"));
+                        $("#tdNacimientoCliente").text($("#"+"fechaNacimientoUser"+posUser+"").attr("alt"));
+                        $("#tdCorreoCliente").text($("#"+"correoUser"+posUser+"").attr("alt"));
+                        $("#tdDireccionCliente").text($("#"+"direccionUser"+posUser+"").attr("alt"));
+                        $("#tdTelefonoCliente").text($("#"+"telefonoUser"+posUser+"").attr("alt"));
+                        $("#tdUsuarioCliente").text($("#"+"usuarioUser"+posUser+"").attr("alt"));
+                        $("#tdContrasenaCliente").text($("#"+"contraseniaUser"+posUser+"").attr("alt"));
+                        $("#tdEstadoCliente").text($("#"+"activoUser"+posUser+"").attr("alt"));
+                        $("#tdRolCliente").text($("#"+"rolUser"+posUser+"").attr("alt"));
+                      
+                     $("#divVerClienteInfo").fadeIn();
+                     
+                     
+                 });
 
                 //Abrir editar cliente
                 
@@ -23,13 +51,12 @@ $(document).ready(function(){
                 
                 //borrar cliente
                 
-                var pos = "";
-                var posBorrar = "";
+          
                 
                 $('#tblClientes').on('click', '.btnBorrar', function(){
                     
-                    pos = "info"+$(this).attr("role");
-                    posBorrar = "tr"+$(this).attr("role");
+                    posUser = "idUser"+$(this).attr("role");
+                    posQuitar = "tr"+$(this).attr("role");
                     
                     var nombreCliente = $(this).attr("alt");
                     $("#divBorrarCliente").fadeIn();
@@ -39,16 +66,16 @@ $(document).ready(function(){
                 
                 $("#btnEliminar").click(function(){
                 
-                   var cedula = $("#"+pos+"").attr("alt");
+                   var idUsuario = $("#"+posUser+"").attr("alt");
         
                    $.post('Controlador', {
                                 action: "borrarCliente",
-                                cedulaCliente: cedula
+                                cedulaCliente: idUsuario
                                 
 			}, function(responseText) {
                         
                                 $("#divBorrarCliente").fadeOut();
-                                $("#tblClientes #"+posBorrar+"").fadeOut();
+                                $("#tblClientes #"+posQuitar+"").fadeOut();
                         });  
                     
                 });
