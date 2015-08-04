@@ -3,6 +3,8 @@
     Created on : Jun 18, 2015, 6:09:57 PM
     Author     : LuisAntonio
 --%>
+<%@page import="Modelo.VacunasBD"%>
+<%@page import="Modelo.Vacunas"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.*"%>
 <%@page import="Modelo.UsuarioBD"%>
@@ -41,6 +43,7 @@
         <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="js/admin.js"></script>
         <script type="text/javascript" src="js/cliente.js"></script>
+        <script type="text/javascript" src="js/vacuna.js"></script>
     </head>
     <body>
                
@@ -145,9 +148,9 @@
                     <input type="text" name="txtUsuario" value="" placeholder="Usuario">
                     <input type="text" name="txtContrasenia" value="" placeholder="Contraseña">
              
-                    <input type="button" value="Guardar" class="btnGuardar" id='btnGuardarCliente'>
-                       <h3 id="complete" class="frmAlertas">Complete todos los campos</h3>
-                        <h3 id="avisoAjax" class="frmAlertas">Guardando cliente...</h3>
+                    <input type="button" value="Guardar" class="btnGuardar" id="btnGuardarCliente">
+                       <h3 id="completeGuardar" class="frmAlertas">Complete todos los campos</h3>
+                        <h3 id="avisoAjaxGuardar" class="frmAlertas">Guardando cliente...</h3>
               
              </form>
                 
@@ -155,15 +158,19 @@
                 
                 </div>
                 
+                <!--############# Editar cliente ##################-->
+                
                 <div id="divEditarCliente" class="FondFrms">
                 
-                    <form role="form" method="post" action="Controlador" id="FormEditarCliente" class="clienteForm" onsubmit="return validarFormCliente(this)">
+                    <form role="form" method="post" id="FormEditarCliente" class="clienteForm" onsubmit="return validarFormEditarCliente(this)">
                    
                     <img class="cerrarForm" src="images/close.png">
                 
                     <h3 class="titutoFrm">Editar cliente</h3>
                 
                     <input type="hidden" name="action" value="editarCliente">
+                    <input type="hidden" name="txtIdUsuario" value="">
+                    <input type="hidden" name="txtOldUser" value="">
                     
                     <input type="text" name="txtNombre" value="" placeholder="Nombre">
                     <input type="text" name="txtApellidos" value="" placeholder="Apellidos">
@@ -211,10 +218,10 @@
                     
                   </div>
                     
-                    <input type="submit" value="Guardar" class="btnGuardar">
+                    <input type="button" value="Guardar" class="btnGuardar" id="btnGuardarEditarCliente">
                         
-                        <h3 id="complete" class="frmAlertas">Complete todos los campos</h3>
-                        <h3 id="existe" class="frmAlertas">Error al guardar, usuario ya existe</h3>
+                        <h3 id="completeEditar" class="frmAlertas">Complete todos los campos</h3>
+                        <h3 id="avisoAjaxEditar" class="frmAlertas">Guardando cliente...</h3>
               
                     </form> 
                 
@@ -238,7 +245,7 @@
                 
                 <h1 id="tituloVerTodos">Clientes</h1>
                 
-                <h2 id="btnAgregarClientes">+ agregar clientes</h2>
+                <h2 id="btnAgregarClientes" class="btnAgregarEntidades">+ agregar clientes</h2>
                             
                 <br>
                 
@@ -301,6 +308,7 @@
                         <input type="hidden" alt="<%= User.getTelefono()%>" id="telefonoUser<%=conteo%>">
                         
                     </td>
+                    
                 </tr>
                 <%
                       conteo++;     }
@@ -309,6 +317,72 @@
             
             </div>
             
+            <!--************VACUNAS**********************-->
+            
+            <div class="divEntidades" id="divVacunas">
+                  
+                <img class="cerrarForm cerrarDivsVacunas" src="images/close.png" id="cerrarDivVacuna">
+                
+                
+                <!--TBLVACUNAS*************************************************************-->
+                
+                 <h1 id="tituloVerTodos">Vacunas</h1>
+                
+                 <h2 id="btnAgregarVacunas" class="btnAgregarEntidades">+ agregar vacunas</h2>
+                            
+                <br>
+                
+                <table border="1" style="margin: 0 auto;" id="tblVacunas">
+                <tr>
+                    <td class="columna"><b>Nombre</b></td>
+                    <td class="columna"><b>Tipo</b></td>
+                    <td class="columna"><b>Estado</b></td>
+                    <td class="columna"><b>Opciones</b></td>
+                </tr>
+                
+                <%
+                            ArrayList<Vacunas> listaVacunas = VacunasBD.cargarVacunas();
+                           int conteoVacunas = 1;
+                     for (Vacunas vacuna : listaVacunas) {
+                         String activoVacuna = "";
+                                if(vacuna.getActivoVacuna()==1){
+                                    activoVacuna = "activada";
+                                }else{ 
+                                    activoVacuna = "desactivada";
+                                }
+                %>
+                <tr id="tr<%=conteoVacunas%>">
+                    <td><%= vacuna.getNombreVacuna()%></td>
+                    <td><%= vacuna.getTipoVacuna()%></td>
+                    <td><%= activoVacuna%></td>
+                    <%-- Enlaces a las paginas de actualizar o eliminar--%>
+                    <td>
+                        
+                        <a><img src="images/infoIcon.png" class="btnOpciones btnVerInfoCliente" role="<%=conteoVacunas%>"></a>
+                        
+                        <a><img src="images/edit.png" class="btnOpciones btnEditar" role="<%=conteoVacunas%>"></a>
+                        
+                        <a><img src="images/delete.png" class="btnOpciones btnBorrar" alt="<%= vacuna.getNombreVacuna()%>" role="<%=conteoVacunas%>"></a>
+                        
+                        <input type="hidden" alt="<%= vacuna.getIdVacunas()%>" id="idVacunas<%=conteoVacunas%>">
+                        
+                        <input type="hidden" alt="<%= vacuna.getNombreVacuna()%>" id="nombreVacunas<%=conteoVacunas%>">
+                        
+                        <input type="hidden" alt="<%= vacuna.getDescripcionVacuna()%>" id="descripcionVacuna<%=conteoVacunas%>">
+                        
+                        <input type="hidden" alt="<%= vacuna.getTipoVacuna()%>" id="tipoVacuna<%=conteoVacunas%>">
+                        
+                        <input type="hidden" alt="<%= vacuna.getActivoVacuna()%>" id="estadoVacuna<%=conteoVacunas%>">
+                        
+                    </td>
+                    
+                </tr>
+                <%
+                      conteoVacunas++;     }
+                %>
+            </table>
+                
+            </div>
             
         <header>
             <h2 id="btnCitas">Citas<img src="images/citas.png" id="citasicon"></h2>
