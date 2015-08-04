@@ -200,8 +200,6 @@ $(document).ready(function(){
                
             $("#btnGuardarEditarCliente").click(function(){
                 
-                alert($("#FormEditarCliente input[name = 'txtNombre']").val());
-                
               if($("#FormEditarCliente input[name = 'txtNombre']").val() == ""){
                         
                     $("#FormEditarCliente input[name = 'txtNombre']").focus();
@@ -307,19 +305,17 @@ $(document).ready(function(){
                                 if(tipo=="Editar"){
                                     
                                     $("#"+aviso+"").text("¡Editado con éxito!");
-                                    $("#tblClientes").html(data);
+                                   
                                     
                                 }else{
                                     
                                     $("#"+aviso+"").text("¡Guardado con éxito!");
-                                    $("#tblClientes").append(data);
                                     
                                     limpiarFormClientes();
                                     
                                 }
-                               
                                 
-                                alert(data);
+                                $("#tblClientes").html(data);
                             }
                                 
 			});
