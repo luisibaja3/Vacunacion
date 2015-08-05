@@ -1,5 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
+/* To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -7,6 +6,8 @@ package Controlador;
 
 import Modelo.Usuario;
 import Modelo.UsuarioBD;
+import Modelo.Vacunas;
+import Modelo.VacunasBD;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -46,10 +47,14 @@ public class Controlador extends HttpServlet {
             this.logout(request, response);
         }else if (accion.equals("agregarCliente")){
             this.agregarCliente(request, response);
-        } else if(accion.equals("cargarClientes")){
+        }else if(accion.equals("cargarClientes")){
             this.cargarClientes(request, response);
         }else if(accion.equals("borrarCliente")){
             this.borrarCliente(request, response);
+        }else if(accion.equals("editarCliente")){
+            this.editarCliente(request, response);
+        }if(accion.equals("agregarVacuna")){
+            this.agregarVacuna(request, response);
         }
 
     }
@@ -98,7 +103,8 @@ public class Controlador extends HttpServlet {
         Usuario cliente = new Usuario();
         String mensaje = "";
         
-        if(UsuarioBD.existeUsuario(request.getParameter("txtUsuario"))==1){
+        
+         if(!UsuarioBD.existeUsuario(request.getParameter("txtUsuario")).equals("no")){
             mensaje = "exi"; //ya existe el usuario
         }else{
      
@@ -126,6 +132,53 @@ public class Controlador extends HttpServlet {
      
     }
     
+        protected void editarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+        response.setContentType( "text/html; charset=iso-8859-1" );
+        PrintWriter out = response.getWriter();
+        
+        Usuario cliente = new Usuario();
+        String mensaje = "";
+        cliente.setId(Integer.parseInt(request.getParameter("txtIdUsuario")));
+        cliente.setNombre(request.getParameter("txtNombre"));
+        cliente.setApellidos(request.getParameter("txtApellidos"));
+        cliente.setCedula(Integer.parseInt(request.getParameter("txtCedula")));
+        cliente.setFechaNacimiento(request.getParameter("diaCliente")+"/"+request.getParameter("mesCliente")+"/"+request.getParameter("annioCliente"));
+        cliente.setCorreo(request.getParameter("txtEmail"));
+        cliente.setDireccion(request.getParameter("txtDirecion"));
+        cliente.setUsuario(request.getParameter("txtUsuario"));
+        cliente.setContrasenia(request.getParameter("txtContrasenia"));
+        cliente.setTelefono(Integer.parseInt(request.getParameter("txtTelefono")));
+        cliente.setActivo(1);
+        cliente.setRol("cliente");
+            
+        if (request.getParameter("txtUsuario").equals(request.getParameter("txtOldUser"))) {
+                
+                 if (UsuarioBD.editarUsuario(cliente).equals("ok")) {
+                 mensaje = cargarTablaCliente();
+                 
+                }else{
+                     mensaje = "er"; //mal
+                }   
+                
+            }else{
+            
+                if(!UsuarioBD.existeUsuario(request.getParameter("txtUsuario")).equals("no")){
+                    mensaje = "exi"; //ya existe el usuario
+                }else{
+        
+                    if (UsuarioBD.editarUsuario(cliente).equals("ok")) {
+                         mensaje = cargarTablaCliente();
+
+                    }else{
+                         mensaje = "er"; //mal
+                    }   
+                }
+                
+            }
+ 
+        out.println(mensaje);
+        
+        }
     
     private void cargarClientes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
@@ -133,8 +186,6 @@ public class Controlador extends HttpServlet {
         
     }
     
-   
-            
     private void  borrarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         response.setContentType( "text/html; charset=iso-8859-1" );
@@ -150,25 +201,106 @@ public class Controlador extends HttpServlet {
     
     private String cargarTablaCliente(){
 
-        String html = "<h2>Hola</h2>";
+        String html = "";
         int conteo = 1;
         ArrayList<Usuario> lista = UsuarioBD.cargarClientes();
+        
+        html = "<tr><td class='columna'><b>Cédula</b></td><td class='columna'><b>Nombre</b></td><td class='columna'><b>Dirección</b></td><td class='columna'><b>Estado</b></td><td class='columna'><b>Opciones</b></td></tr>";
+        
                            
                    for (Usuario User : lista) {
+                       
                          String activoS = "";
+                         
                                 if(User.getActivo()==1){
                                     activoS = "activado";
                                 }else{ 
                                     activoS = "desactivado";
                                 }
-                   html = "<tr id='tr"+conteo+"'><td>"+User.getCedula()+"</td><td>"+User.getNombre()+" "+User.getApellidos()+"</td>";
+                                
+                   html += "<tr id='tr"+conteo+"'><td>"+User.getCedula()+"</td><td>"+User.getNombre()+" "+User.getApellidos()+"</td>";
                    html += "<td>"+User.getDireccion()+"</td>"; 
                    html += "<td>"+activoS+"</td>";
-                   html += "<td><a><img src='images/edit.png' class='btnOpciones btnEditar'></a>";
+                   html += "<td><a><img src='images/infoIcon.png' class='btnOpciones btnVerInfoCliente' role="+conteo+"></a>";
+                   html += "<a><img src='images/edit.png' class='btnOpciones btnEditar' role="+conteo+"></a>";
                    html += "<a><img src='images/delete.png' class='btnOpciones btnBorrar' alt='"+User.getNombre()+" "+User.getApellidos()+"' role="+conteo+"></a>";
-                   html += "<input type='hidden' alt="+User.getCedula()+" id=info"+conteo+"></td></tr>";
-                
+                 
+                   html += "<input type='hidden' alt="+User.getId()+" id=idUser"+conteo+">";
+                   html += "<input type='hidden' alt="+User.getCedula()+" id=cedulaUser"+conteo+">";
+                   html += "<input type='hidden' alt="+User.getNombre()+" id=nombreUser"+conteo+">";
+                   html += "<input type='hidden' alt="+User.getApellidos()+" id=apellidosUser"+conteo+">";
+                   html += "<input type='hidden' alt="+User.getUsuario()+" id=usuarioUser"+conteo+">";
+                   html += "<input type='hidden' alt="+User.getContrasenia()+" id=contraseniaUser"+conteo+">";
+                   html += "<input type='hidden' alt="+User.getCorreo()+" id=correoUser"+conteo+">";
+                   html += "<input type='hidden' alt="+User.getDireccion()+" id=direccionUser"+conteo+">";
+                   html += "<input type='hidden' alt="+User.getFechaNacimiento()+" id=fechaNacimientoUser"+conteo+">";
+                   html += "<input type='hidden' alt="+activoS+" id='activoUser"+conteo+"'>";
+                   html += "<input type='hidden' alt="+User.getRol()+" id=rolUser"+conteo+">";
+                   html += "<input type='hidden' alt="+User.getTelefono()+" id=telefonoUser"+conteo+"></td></tr>";
+                   
                       conteo++; 
+                     }
+                
+        return html;
+    }
+
+    private void agregarVacuna(HttpServletRequest request, HttpServletResponse response) throws IOException {
+         response.setContentType( "text/html; charset=iso-8859-1" );
+        PrintWriter out = response.getWriter();
+        
+        Vacunas vacuna = new Vacunas();
+        String mensaje = "";
+        
+        
+         if(!VacunasBD.existeVacuna(request.getParameter("txtNombreVacuna")).equals("no")){
+            mensaje = "exi"; //ya existe la vacuna
+        }else{
+     
+        vacuna.setNombreVacuna(request.getParameter("txtNombreVacuna"));
+        vacuna.setDescripcionVacuna(request.getParameter("txtDescripcionVacuna"));
+        vacuna.setTipoVacuna(request.getParameter("txtTipoVacuna"));
+        vacuna.setActivoVacuna(1);
+        
+            if (VacunasBD.guardarVacuna(vacuna).equals("ok")) {
+                 mensaje = cargarTablaVacunas();
+                 
+            }else{
+                mensaje = "er"; //mal
+               // mensaje = VacunasBD.guardarVacuna(vacuna);
+            }   
+        }
+       
+        out.println(mensaje);
+    }
+    
+     private String cargarTablaVacunas(){
+
+        String html = "";
+         int conteoVacunas = 1;
+        ArrayList<Vacunas> listaVacunas = VacunasBD.cargarVacunas();
+        
+        html = "<tr><td class='columna'><b>Nombre</b></td><td class='columna'><b>Tipo</b></td><td class='columna'><b>Estado</b></td><td class='columna'><b>Opciones</b></td></tr>";
+                
+                for (Vacunas vacuna : listaVacunas) {
+                         String activoVacuna = "";
+                                if(vacuna.getActivoVacuna()==1){
+                                    activoVacuna = "activada";
+                                }else{ 
+                                    activoVacuna = "desactivada";
+                                }
+                                
+                   html += "<tr id='tr"+conteoVacunas+"'> <td>"+vacuna.getNombreVacuna()+"</td><td>"+vacuna.getTipoVacuna()+"</td><td>"+activoVacuna+"</td>";
+                   html += "<td><a><img src='images/infoIcon.png' class='btnOpciones btnVerInfoVacunas' role="+conteoVacunas+"></a>";
+                   html += "<a><img src='images/edit.png' class='btnOpciones btnEditar' role="+conteoVacunas+"></a>";
+                   html += "<a><img src='images/delete.png' class='btnOpciones btnBorrar' alt="+vacuna.getNombreVacuna()+" role="+conteoVacunas+"></a>";
+                   
+                   html += "<input type='hidden' alt="+vacuna.getIdVacunas()+"' id='idVacunas"+conteoVacunas+"'>";
+                   html += "<input type='hidden' alt="+vacuna.getNombreVacuna()+"' id='nombreVacuna"+conteoVacunas+"'>";
+                   html += "<input type='hidden' alt="+vacuna.getDescripcionVacuna()+"' id='descripcionVacuna"+conteoVacunas+"'>";
+                   html += "<input type='hidden' alt="+vacuna.getTipoVacuna()+"' id='tipoVacuna"+conteoVacunas+"'>";
+                   html += "<input type='hidden' alt="+vacuna.getActivoVacuna()+"' id='estadoVacuna"+conteoVacunas+"'></td> </tr>";
+                   
+                      conteoVacunas++; 
                      }
                 
         return html;
