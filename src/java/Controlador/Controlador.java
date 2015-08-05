@@ -55,6 +55,8 @@ public class Controlador extends HttpServlet {
             this.agregarVacuna(request, response);
         }else if(accion.equals("borrarVacuna")){
             this.borrarVacuna(request, response);
+        }else if(accion.equals("editarVacuna")){
+            this.editarVacuna(request, response);
         }
 
     }
@@ -288,11 +290,11 @@ public class Controlador extends HttpServlet {
                    html += "<a><img src='images/edit.png' class='btnOpciones btnEditar' role="+conteoVacunas+"></a>";
                    html += "<a><img src='images/delete.png' class='btnOpciones btnBorrar' alt="+vacuna.getNombreVacuna()+" role="+conteoVacunas+"></a>";
                    
-                   html += "<input type='hidden' alt="+vacuna.getIdVacunas()+"' id='idVacunas"+conteoVacunas+"'>";
-                   html += "<input type='hidden' alt="+vacuna.getNombreVacuna()+"' id='nombreVacuna"+conteoVacunas+"'>";
-                   html += "<input type='hidden' alt="+vacuna.getDescripcionVacuna()+"' id='descripcionVacuna"+conteoVacunas+"'>";
-                   html += "<input type='hidden' alt="+vacuna.getTipoVacuna()+"' id='tipoVacuna"+conteoVacunas+"'>";
-                   html += "<input type='hidden' alt="+activoVacuna+"' id='estadoVacuna"+conteoVacunas+"'></td> </tr>";
+                   html += "<input type='hidden' alt="+vacuna.getIdVacunas()+" id=idVacunas"+conteoVacunas+">";
+                   html += "<input type='hidden' alt="+vacuna.getNombreVacuna()+" id=nombreVacuna"+conteoVacunas+">";
+                   html += "<input type='hidden' alt="+vacuna.getDescripcionVacuna()+" id=descripcionVacuna"+conteoVacunas+">";
+                   html += "<input type='hidden' alt="+vacuna.getTipoVacuna()+" id=tipoVacuna"+conteoVacunas+">";
+                   html += "<input type='hidden' alt="+activoVacuna+" id=estadoVacuna"+conteoVacunas+"></td> </tr>";
                    
                       conteoVacunas++; 
                      }
@@ -312,4 +314,47 @@ public class Controlador extends HttpServlet {
         out.println(estado);
         
     }
+
+    protected void editarVacuna(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+        
+        response.setContentType( "text/html; charset=iso-8859-1" );
+        PrintWriter out = response.getWriter();
+        
+        Vacunas vacuna = new Vacunas();
+        String mensaje = "";
+        
+        vacuna.setIdVacunas(Integer.parseInt(request.getParameter("txtIdVacuna")));
+        vacuna.setNombreVacuna(request.getParameter("txtNombreVacuna"));
+        vacuna.setDescripcionVacuna(request.getParameter("txtDescripcionVacuna"));
+        vacuna.setTipoVacuna(request.getParameter("txtTipoVacuna"));
+        vacuna.setActivoVacuna(Integer.parseInt(request.getParameter("slActivoVacuna")));
+            
+        if (request.getParameter("txtNombreVacuna").equals(request.getParameter("txtOldNameVacuna"))) {
+                
+                 if (VacunasBD.editarVacuna(vacuna).equals("ok")) {
+                 mensaje = cargarTablaVacunas();
+                 
+                }else{
+                     mensaje = "er"; //mal
+                }   
+                
+            }else{
+            
+                if(!VacunasBD.existeVacuna(request.getParameter("txtNombreVacuna")).equals("no")){
+                    mensaje = "exi"; //ya existe el usuario
+                }else{
+        
+                    if (VacunasBD.editarVacuna(vacuna).equals("ok")) {
+                         mensaje = cargarTablaVacunas();
+
+                    }else{
+                         mensaje = "er"; //mal
+                    }   
+                }
+                
+            }
+ 
+        out.println(mensaje);
+        
+        }
 }
