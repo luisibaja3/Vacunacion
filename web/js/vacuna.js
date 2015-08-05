@@ -1,10 +1,52 @@
 $(document).ready(function(){
     
+                var posVacuna = "";
+                var posQuitar = "";
+    
                 $("#btnAbrirVacunas").click(function() {
                    $("#divVacunas").fadeIn();
                 });
                 
-                       posVacuna = "";
+                
+                $('#tblVacunas').on('click', '.btnBorrar', function(){
+                    
+                    posVacuna = "idVacunas"+$(this).attr("role");
+                    posQuitar = "trVacuna"+$(this).attr("role");
+                    
+                    var nombreVacuna = $(this).attr("alt");
+                    
+                    $("#divBorrarVacuna").fadeIn();
+                    $("#preguntaBorrarVacuna").text("¿Eliminar a "+ nombreVacuna +" del sistema?");
+                    
+                });
+                
+                $("#btnEliminarVacuna").click(function(){
+                
+                   var idVacuna = $("#"+posVacuna+"").attr("alt");
+                   
+                   $.post('Controlador', {
+                                action: "borrarVacuna",
+                                idVacuna: idVacuna
+                                
+			}, function(responseText) {
+                            
+                            if (responseText == 1){
+                                
+                                
+                                $("#divBorrarVacuna").fadeOut();
+                                $("#tblVacunas #"+posQuitar+"").fadeOut();
+                                
+                            }else{
+                                
+                               alert("Error al eliminar la vacuna\n\
+                                    Nota: si esta está asociada a una cita debera quitar la cita primero.");
+                                
+                            }
+                        
+                        });  
+                    
+                });
+                
                 
                 //#####Abrir info de las vacunas
                 
@@ -55,10 +97,13 @@ $(document).ready(function(){
                          $("#completeGuardarVacunas").fadeOut();
                          var form = "GuardarVacunaForm";
                          var tipo = "Guardar";
-                         alert($("#"+form+"").serialize());
+                         guardarVacuna(tipo, form);
                         
                     }
                });
+               
+               
+               
     
 });
 
@@ -111,9 +156,9 @@ $(document).ready(function(){
                                 }
                                 
                                 $("#tblVacunas").html(data);
-                            }
-                                
-			});
+                            
+                                }
+                        });
                         
               }
               
