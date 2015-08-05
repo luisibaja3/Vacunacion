@@ -47,14 +47,14 @@ public class Controlador extends HttpServlet {
             this.logout(request, response);
         }else if (accion.equals("agregarCliente")){
             this.agregarCliente(request, response);
-        }else if(accion.equals("cargarClientes")){
-            this.cargarClientes(request, response);
         }else if(accion.equals("borrarCliente")){
             this.borrarCliente(request, response);
         }else if(accion.equals("editarCliente")){
             this.editarCliente(request, response);
         }if(accion.equals("agregarVacuna")){
             this.agregarVacuna(request, response);
+        }else if(accion.equals("borrarVacuna")){
+            this.borrarVacuna(request, response);
         }
 
     }
@@ -180,12 +180,6 @@ public class Controlador extends HttpServlet {
         
         }
     
-    private void cargarClientes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        
-        
-    }
-    
     private void  borrarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         response.setContentType( "text/html; charset=iso-8859-1" );
@@ -289,7 +283,7 @@ public class Controlador extends HttpServlet {
                                     activoVacuna = "desactivada";
                                 }
                                 
-                   html += "<tr id='tr"+conteoVacunas+"'> <td>"+vacuna.getNombreVacuna()+"</td><td>"+vacuna.getTipoVacuna()+"</td><td>"+activoVacuna+"</td>";
+                   html += "<tr id='trVacuna"+conteoVacunas+"'> <td>"+vacuna.getNombreVacuna()+"</td><td>"+vacuna.getTipoVacuna()+"</td><td>"+activoVacuna+"</td>";
                    html += "<td><a><img src='images/infoIcon.png' class='btnOpciones btnVerInfoVacunas' role="+conteoVacunas+"></a>";
                    html += "<a><img src='images/edit.png' class='btnOpciones btnEditar' role="+conteoVacunas+"></a>";
                    html += "<a><img src='images/delete.png' class='btnOpciones btnBorrar' alt="+vacuna.getNombreVacuna()+" role="+conteoVacunas+"></a>";
@@ -298,11 +292,24 @@ public class Controlador extends HttpServlet {
                    html += "<input type='hidden' alt="+vacuna.getNombreVacuna()+"' id='nombreVacuna"+conteoVacunas+"'>";
                    html += "<input type='hidden' alt="+vacuna.getDescripcionVacuna()+"' id='descripcionVacuna"+conteoVacunas+"'>";
                    html += "<input type='hidden' alt="+vacuna.getTipoVacuna()+"' id='tipoVacuna"+conteoVacunas+"'>";
-                   html += "<input type='hidden' alt="+vacuna.getActivoVacuna()+"' id='estadoVacuna"+conteoVacunas+"'></td> </tr>";
+                   html += "<input type='hidden' alt="+activoVacuna+"' id='estadoVacuna"+conteoVacunas+"'></td> </tr>";
                    
                       conteoVacunas++; 
                      }
                 
         return html;
+    }
+
+    private void borrarVacuna(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+         response.setContentType( "text/html; charset=iso-8859-1" );
+        PrintWriter out = response.getWriter();
+        
+        int idVacuna = Integer.parseInt(request.getParameter("idVacuna"));
+        
+       int estado = VacunasBD.borrarVacuna(idVacuna);
+        
+        out.println(estado);
+        
     }
 }
