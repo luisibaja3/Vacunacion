@@ -57,6 +57,10 @@ public class Controlador extends HttpServlet {
             this.borrarVacuna(request, response);
         }else if(accion.equals("editarVacuna")){
             this.editarVacuna(request, response);
+        }else if(accion.equals("cargarOptionsClientes")){
+            this.cargarOptionsClientes(request, response);
+        }else if(accion.equals("cargarOptionsVacunas")){
+            this.cargarOptionsVacunas(request, response);
         }
 
     }
@@ -290,11 +294,11 @@ public class Controlador extends HttpServlet {
                    html += "<a><img src='images/edit.png' class='btnOpciones btnEditar' role="+conteoVacunas+"></a>";
                    html += "<a><img src='images/delete.png' class='btnOpciones btnBorrar' alt="+vacuna.getNombreVacuna()+" role="+conteoVacunas+"></a>";
                    
-                   html += "<input type='hidden' alt="+vacuna.getIdVacunas()+" id=idVacunas"+conteoVacunas+">";
-                   html += "<input type='hidden' alt="+vacuna.getNombreVacuna()+" id=nombreVacuna"+conteoVacunas+">";
-                   html += "<input type='hidden' alt="+vacuna.getDescripcionVacuna()+" id=descripcionVacuna"+conteoVacunas+">";
-                   html += "<input type='hidden' alt="+vacuna.getTipoVacuna()+" id=tipoVacuna"+conteoVacunas+">";
-                   html += "<input type='hidden' alt="+activoVacuna+" id=estadoVacuna"+conteoVacunas+"></td> </tr>";
+                   html += "<input type='hidden' alt='"+vacuna.getIdVacunas()+"' id=idVacunas"+conteoVacunas+">";
+                   html += "<input type='hidden' alt='"+vacuna.getNombreVacuna()+"' id=nombreVacuna"+conteoVacunas+">";
+                   html += "<input type='hidden' alt='"+vacuna.getDescripcionVacuna()+"' id=descripcionVacuna"+conteoVacunas+">";
+                   html += "<input type='hidden' alt='"+vacuna.getTipoVacuna()+"' id=tipoVacuna"+conteoVacunas+">";
+                   html += "<input type='hidden' alt='"+activoVacuna+"' id=estadoVacuna"+conteoVacunas+"></td> </tr>";
                    
                       conteoVacunas++; 
                      }
@@ -357,4 +361,48 @@ public class Controlador extends HttpServlet {
         out.println(mensaje);
         
         }
+
+    private void cargarOptionsClientes(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+        response.setContentType( "text/html; charset=iso-8859-1" );
+        PrintWriter out = response.getWriter();
+        
+        String html = "";
+        ArrayList<Usuario> lista = UsuarioBD.cargarClientes();
+        
+        html = "";
+                for (Usuario user : lista) {
+                    
+                                if(user.getActivo()==1){
+                              
+                                       html+="<option value="+user.getId()+">"+user.getNombre()+" "+user.getApellidos()+"</option>";
+            
+                                }
+                     }
+                
+        out.println(html);
+        
+    }
+
+    private void cargarOptionsVacunas(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+        response.setContentType( "text/html; charset=iso-8859-1" );
+        PrintWriter out = response.getWriter();
+        
+        String html = "";
+        ArrayList<Vacunas> lista = VacunasBD.cargarVacunas();
+        
+        html = "";
+                for (Vacunas vacuna : lista) {
+                    
+                                if(vacuna.getActivoVacuna()==1){
+                              
+                                       html+="<option value="+vacuna.getIdVacunas()+">"+vacuna.getNombreVacuna()+"</option>";
+            
+                                }
+                     }
+                
+        out.println(html);
+        
+    }
 }
