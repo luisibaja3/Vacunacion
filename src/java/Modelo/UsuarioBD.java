@@ -62,11 +62,11 @@ public class UsuarioBD extends HttpServlet {
         return User;
     }
     
-    public static int existeUsuario(String user) {
+    public static String existeUsuario(String user) {
         Connection cn = null;
         CallableStatement cl = null;
         ResultSet rs = null;
-        int existe = 0;
+        String existe = "no";
 
         try {
             //Nombre del procedimiento almacenado
@@ -80,7 +80,8 @@ public class UsuarioBD extends HttpServlet {
             //Consultamos si hay datos para recorrerlo
             //e insertarlo en nuestro array
             if (rs.next()) {
-                existe = 1;
+                existe = rs.getString("Usuario");
+                
             }
             ConexionBD.cerrarCall(cl);
             ConexionBD.cerrarConexion(cn);
@@ -119,6 +120,52 @@ public class UsuarioBD extends HttpServlet {
             cl.setInt(9, user.getActivo());
             cl.setString(10, user.getRol());
             cl.setInt(11, user.getTelefono());
+            
+            //La sentencia lo almacenamos en un resulset
+            cl.executeQuery();
+            //Consultamos si hay datos para recorrerlo
+            //e insertarlo en nuestro array
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+
+        } catch (SQLException e) {
+            exito = e.toString();
+            e.printStackTrace();
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+            
+        } catch (Exception e) {
+             exito = e.toString();
+            System.out.print(e);
+            e.printStackTrace();
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+        }
+        return exito;
+    }
+    
+        public static String editarUsuario(Usuario user) {
+        Connection cn = null;
+        CallableStatement cl = null;
+        String exito = "ok";
+        
+        try {
+            //Nombre del procedimiento almacenado
+            String call = "{CALL actualizarUsuario(?,?,?,?,?,?,?,?,?,?,?,?)}";
+            cn = ConexionBD.getConexion();
+            cl = cn.prepareCall(call);
+            cl.setInt(1, user.getCedula());
+            cl.setString(2, user.getNombre());
+            cl.setString(3, user.getApellidos());
+            cl.setString(4, user.getUsuario());
+            cl.setString(5, user.getContrasenia());
+            cl.setString(6, user.getDireccion());
+            cl.setString(7, user.getFechaNacimiento());
+            cl.setString(8, user.getCorreo());//
+            cl.setInt(9, user.getActivo());
+            cl.setString(10, user.getRol());
+            cl.setInt(11, user.getTelefono());
+            cl.setInt(12, user.getId());
             
             //La sentencia lo almacenamos en un resulset
             cl.executeQuery();
