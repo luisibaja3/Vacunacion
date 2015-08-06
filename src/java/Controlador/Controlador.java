@@ -67,6 +67,8 @@ public class Controlador extends HttpServlet {
             this.guardarCita(request, response);
         }else if(accion.equals("cargarTablaCitas")){
             this.cargarTablaCitas(request, response);
+        }else if(accion.equals("borrarCita")){
+            this.borrarCita(request, response);
         }
 
     }
@@ -473,21 +475,21 @@ public class Controlador extends HttpServlet {
                         
                         html+="<a><img src='images/delete.png' class='btnOpciones btnBorrar btnOpcionesCitas' alt="+cita.getNombreClienteCita()+" role="+conteoCitas+"></a>";
                         
-                       html+= "<input type='hidden' alt='"+cita.getIdCita()+"' id='idCitas"+conteoCitas+">";
+                        html+= "<input type='hidden' alt='"+cita.getIdCita()+"' id='idCitas"+conteoCitas+"'>";
                         
-                        html+= "<input type='hidden' alt="+cita.getFechaCita()+" id='fechaCita"+conteoCitas+">";
+                        html+= "<input type='hidden' alt='"+cita.getFechaCita()+"' id='fechaCita"+conteoCitas+"'>";
                         
-                        html+= "<input type='hidden' alt="+cita.getNombreClienteCita()+" id='nombreClienteCita"+conteoCitas+">";
+                        html+= "<input type='hidden' alt='"+cita.getNombreClienteCita()+"' id='nombreClienteCita"+conteoCitas+"'>";
                         
-                        html+= "<input type='hidden' alt="+cita.getDetallesCita()+" id='detallesCita"+conteoCitas+"'>";
+                        html+= "<input type='hidden' alt='"+cita.getDetallesCita()+"' id='detallesCita"+conteoCitas+"'>";
                         
-                        html+= "<input type='hidden' alt="+cita.getCompletada()+" id='completada"+conteoCitas+">";
+                        html+= "<input type='hidden' alt='"+cita.getCompletada()+"' id='completada"+conteoCitas+"'>";
                         
-                        html+= "<input type='hidden' alt="+cita.getHoraCita()+" id='horaCita"+conteoCitas+">";
+                        html+= "<input type='hidden' alt='"+cita.getHoraCita()+"' id='horaCita"+conteoCitas+"'>";
                         
-                        html+= "<input type='hidden' alt="+cita.getNombreVacunaCita()+" id='nombreVacunaCita"+conteoCitas+">";
+                        html+= "<input type='hidden' alt='"+cita.getNombreVacunaCita()+"' id='nombreVacunaCita"+conteoCitas+"'>";
                         
-                       html+= "<input type='hidden' alt="+cita.getLugarCita()+" id='lugarCita"+conteoCitas+"'></td></tr>";
+                       html+= "<input type='hidden' alt='"+cita.getLugarCita()+"' id='lugarCita"+conteoCitas+"'></td></tr>";
                 
                                 } 
                                 
@@ -500,5 +502,18 @@ public class Controlador extends HttpServlet {
                 
                   out.println(html);
                   
+    }
+
+    private void borrarCita(HttpServletRequest request, HttpServletResponse response) throws IOException {
+            
+        response.setContentType( "text/html; charset=iso-8859-1" );
+              PrintWriter out = response.getWriter();
+
+              int idCita = Integer.parseInt(request.getParameter("idCita"));
+
+             int estado = CitaBD.borrarCita(idCita);
+
+              out.println(estado);
+        
     }
 }

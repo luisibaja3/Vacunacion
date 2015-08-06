@@ -42,7 +42,7 @@ public class CitaBD extends HttpServlet{
                                
                 cita.setIdCita(Integer.parseInt(rs.getString("IdCita")));
                 cita.setFechaCita(rs.getString("Fecha"));
-                cita.setNombreClienteCita(rs.getString("Nombre"));
+                cita.setNombreClienteCita(rs.getString("Nombre")+" "+rs.getString("Apellidos"));
                 cita.setDetallesCita(rs.getString("Detalles"));
                 cita.setCompletada(Integer.parseInt(rs.getString("Completada")));
                 cita.setHoraCita(rs.getString("Hora"));
@@ -109,5 +109,45 @@ public class CitaBD extends HttpServlet{
         }
         return exito;
     }
+      
+      public static int borrarCita(int idCita) {
+        
+            Connection cn = null;
+            CallableStatement cl = null;
+            int exito = 0;
+        
+        try {
+            //Nombre del procedimiento almacenado
+            String call = "{CALL eliminarCitas(?)}";
+            cn = ConexionBD.getConexion();
+            cl = cn.prepareCall(call);
+            cl.setInt(1, idCita);
+            
+       
+            //La sentencia lo almacenamos en un resulset
+            cl.executeQuery();
+            //Consultamos si hay datos para recorrerlo
+            //e insertarlo en nuestro array
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+            exito = 1;
+
+        } catch (SQLException e) {
+            exito = 0;
+            e.printStackTrace();
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+            
+        } catch (Exception e) {
+             exito = 0;
+            System.out.print(e);
+            e.printStackTrace();
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+        }
+            
+            return exito;
+            
+        }
     
 }

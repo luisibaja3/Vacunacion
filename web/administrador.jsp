@@ -668,6 +668,92 @@
                     </div>
                     
                 </div>
+                
+                
+                <!--**************Editar Citas**********************-->
+                
+                <div class="FondFrms" id="divEditarCita">
+            
+                <form role="form" method="post" id="EditarCitaForm" class="clienteForm">
+                     
+                     <input type="hidden" name="action" value="guardarCita">
+                    
+                    <img class="cerrarForm" src="images/close.png">
+          
+                     <h3 class="titutoFrm">Editar cita</h3>
+                  
+                    <div id="contenedorFechaEditarCita" class="contenedorFecha">
+                    
+                        <h3>fecha de la cita:</h3>
+                            <input class="fechaForm" type="number" name="diaCita" value="" placeholder="día" id="diaEditarCita" min="1" max="31">  
+                            <input class="fechaForm" type="number" name="mesCita" value="" placeholder="mes" id="mesEditarCita" min="1" max="12">
+                            <input class="fechaForm" type="number" name="annioCita" value="" placeholder="año" id="annioEditarCita" min="1900" max="2200">
+
+                    </div>
+                    
+                    <div id="ContenedorHoraEditarCita" class="contenedorFecha">
+                    <br>
+                        <h3>Hora de la cita:</h3>
+                            <input class="fechaForm" type="number" name="hora" value="" placeholder="hora" id="horaEditarCita" min="1" max="12">
+                            <input class="fechaForm" type="number" name="minutos" value="" placeholder="minutos" id="minutosEditarCita" min="1" max="59">
+                            
+                            <select name="slAmPmCita" id="AmPmEditarCita" class="selectCitas">
+                                <option value="am">am</option>
+                                <option value="pm">pm</option>
+                        </select>
+                            
+                    </div>
+                    <br>
+                    <h3>Descripción:</h3>
+                    
+                    <textarea name="txtDetallesEditarCita" class="txtAreaCitas" id="txtDetallesEditarcita"></textarea>
+                    
+                <div class="DivSlEditCliente">
+                    
+                    <p class="pSlEditCliente">Cliente:</p>
+                   
+                        <select name="slClienteEditarCita"  class="SlEditCliente" id="clienteEditarCita">
+
+                         <option value="123421">Cargando..</option>
+
+                        </select>
+                               
+                  </div>   
+                    
+                    
+                <div class="DivSlEditCliente">
+                    
+                    <p class="pSlEditCliente">Vacuna:</p>
+                   
+                        <select name="slVacunaEditarCita"  class="SlEditCliente" id="vacunaEditarCita">
+
+                        <option value="123421">Cargando..</option>
+
+                        </select>
+                               
+                  </div>
+                    
+                    <div class="DivSlEditCliente">
+                    
+                    <p class="pSlEditCliente">Estado:</p>
+                   
+                        <select name="slCompletada"  class="SlEditCliente" id="completadaEditarCita">
+
+                        <option value="1">Completada</option>
+                        <option value="0">Sin completar</option>
+
+                        </select>
+                               
+                  </div>
+                    
+                    <input type="button" value="Guardar" class="btnGuardar" id="btnGuardarEditarCita">
+                    
+                       <h3 id="completeEditarCita" class="frmAlertas">Complete todos los campos</h3>
+                        <h3 id="avisoAjaxEditarCita" class="frmAlertas">Guardando cita...</h3>
+              
+                </form>
+            
+            </div>
         
                 <!--****************Agregar citas****************-->
                 
@@ -739,6 +825,21 @@
             
             </div>
                 
+                 <div id="divBorrarCita" class="FondFrms">
+            
+                <form role="form" method="post" action="Controlador" class="formSiNo">
+
+                    <h2 id="preguntaBorrarCita">¿?</h2>
+
+                        
+
+                         <input type="button" value="Sí" name="btnEliminar" id="btnEliminarCita" class="btnPositivo">
+
+                         <input type="button" value="No" name="NoEliminar" class="btnNegativo">
+
+                 </form>
+            
+                </div>
                 
         <footer>
             <h2 id="nombreUsuario">Bienvenido, <%=nombre%></h2>

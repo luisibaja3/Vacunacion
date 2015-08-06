@@ -6,6 +6,107 @@ $(document).ready(function(){
                 var posQuitarCita = "";
                 
                 
+                
+                //Abrir editar cita
+                
+                $('#tblcitas').on('click', '.btnEditar', function(){
+                    
+                    posCita = $(this).attr("role");
+                    
+                    var elem = $("#"+"fechaCita"+posCita+"").attr("alt").split('-');
+                    
+                    var annio = elem[0];
+                    var mes = elem[1];
+                    var dia = elem[2];
+                    
+                    var PosHora = $("#"+"horaCita"+posCita+"").attr("alt").split(':');
+                    var hora = PosHora[0];
+                    var minutos = PosHora[1];
+                    var AmPm = parseInt(PosHora[0]);
+                    
+                    var AmPmFinal = "am";
+                    if(AmPm>12){
+                        hora-=12;
+                        AmPmFinal = "pm";
+                    }
+                    
+                    //FEcha
+                    $("#contenedorFechaEditarCita input[name = 'diaCita']").val(dia);
+                    
+                    $("#contenedorFechaEditarCita input[name = 'mesCita']").val(mes);
+                    
+                    $("#contenedorFechaEditarCita input[name = 'annioCita']").val(annio);
+                    
+                    //hora
+                    $("#ContenedorHoraEditarCita input[name = 'hora']").val(hora);
+                    
+                    $("#ContenedorHoraEditarCita input[name = 'minutos']").val(minutos);
+                    
+                    $("#ContenedorHoraEditarCita option[value = '"+AmPmFinal+"']").attr("selected",true); 
+                    
+                    $.post('Controlador', {
+                       
+                                action: "cargarOptionsClientes"
+                                
+			}, function(responseText) {
+                            
+                            $("#clienteEditarCita").html(responseText);
+                        
+                        });
+                        
+                    $.post('Controlador', {
+                       
+                                action: "cargarOptionsVacunas"
+                                
+			}, function(responseText) {
+                            
+                            $("#vacunaEditarCita").html(responseText);
+                        
+                        });
+                    
+                    $("#txtDetallesEditarcita").text($("#"+"detallesCita"+posCita+"").attr("alt"));
+                    
+                    
+                    $("#clienteEditarCita option[value = '"+$("#"+"nombreClienteCita"+posCita+"").attr("alt")+"']").attr("selected",true);
+                    
+                    $("#vacunaEditarCita option[value = '"+$("#"+"nombreVacunaCita"+posCita+"").attr("alt")+"']").attr("selected",true); 
+                    
+                    
+                    $("#completadaEditarCita option[value = '"+$("#"+"completada"+posCita+"").attr("alt")+"']").attr("selected",true); 
+                    
+                    $("#divEditarCita").fadeIn();
+                    
+                });
+                
+                
+                $('#tblcitas').on('click', '.btnBorrar', function(){
+
+                    posCita = "idCitas"+$(this).attr("role");
+                    posQuitarCita = "trCita"+$(this).attr("role");
+                    
+                    var nombreCita = $(this).attr("alt");
+                    $("#divBorrarCita").fadeIn();
+                    $("#preguntaBorrarCita").text("¿Eliminar la cita de "+nombreCita+" del sistema?");
+                    
+                });
+                
+                $("#btnEliminarCita").click(function(){
+                
+                
+                   var idCita = $("#"+posCita+"").attr("alt");
+        
+                   $.post('Controlador', {
+                                action: "borrarCita",
+                                idCita: idCita
+                                
+			}, function(responseText) {
+                        
+                                $("#divBorrarCita").fadeOut();
+                                $("#tblcitas #"+posQuitarCita+"").fadeOut();
+                        });  
+                    
+                });
+                
                 //ver info de las citas
                 
                                 //Abrir toda la información del cliente
@@ -33,6 +134,8 @@ $(document).ready(function(){
                         $("#tdFechaCita").text(dia+"-"+mes+"-"+annio);
                         $("#tdHoraCita").text($("#"+"horaCita"+posCita+"").attr("alt"));
                         $("#tdDetalleCita").text($("#"+"detallesCita"+posCita+"").attr("alt"));
+                        
+                        
                         
                         $("#tdPacienteCita").text($("#"+"nombreClienteCita"+posCita+"").attr("alt"));
                         $("#tdLugarCita").text($("#"+"lugarCita"+posCita+"").attr("alt"));
@@ -116,10 +219,8 @@ $(document).ready(function(){
         });
         
       function guardarCita(tipo, form){
-               
-               alert($("#"+form+"").serialize());
-               
-               var aviso = "avisoAjax"+tipo+"Cita";
+             
+             var aviso = "avisoAjax"+tipo+"Cita";
                
                $("#"+aviso+"").fadeIn();
                $("#"+aviso+"").text("Guardando...");
@@ -164,7 +265,7 @@ $(document).ready(function(){
                $("#contenedorFechaCita input[name = 'annioCita']").val("");
                $("#ContenedorHoraCita input[name = 'hora']").val("");
                $("#ContenedorHoraCita input[name = 'minutos']").val("");
-               $("#txtDetallesCita").val("");
+               $("#txtDetallesCita").text("");
                
                
            }
