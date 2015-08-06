@@ -43,6 +43,7 @@ public class VacunasBD extends HttpServlet {
                 vacunin.setDescripcionVacuna(rs.getString("DescripcionVacuna"));
                 vacunin.setTipoVacuna(rs.getString("TipoVacuna"));
                 vacunin.setActivoVacuna(Integer.parseInt(rs.getString("ActivoVacuna")));
+                
                 //Lo adicionamos a nuestra lista
                 lista.add(vacunin);
             }

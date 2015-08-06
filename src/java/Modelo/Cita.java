@@ -18,12 +18,13 @@ public class Cita {
     private String horaCita;//
     private String nombreVacunaCita;
     private String lugarCita;
+    private int idUsuario;
+    private int idVacuna;
 
     public Cita() {
     }
 
-    public Cita(String fechaCita, String nombreClienteCita, String detallesCita, int completada, String horaCita, String nombreVacunaCita, String lugarCita) {
-
+    public Cita(String fechaCita, String nombreClienteCita, String detallesCita, int completada, String horaCita, String nombreVacunaCita, String lugarCita, int idUsuario, int idVacuna) {
         this.fechaCita = fechaCita;
         this.nombreClienteCita = nombreClienteCita;
         this.detallesCita = detallesCita;
@@ -31,6 +32,8 @@ public class Cita {
         this.horaCita = horaCita;
         this.nombreVacunaCita = nombreVacunaCita;
         this.lugarCita = lugarCita;
+        this.idUsuario = idUsuario;
+        this.idVacuna = idVacuna;
     }
 
     public int getIdCita() {
@@ -96,4 +99,22 @@ public class Cita {
     public void setLugarCita(String lugarCita) {
         this.lugarCita = lugarCita;
     }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getIdVacuna() {
+        return idVacuna;
+    }
+
+    public void setIdVacuna(int idVacuna) {
+        this.idVacuna = idVacuna;
+    }
+    
+    
 }

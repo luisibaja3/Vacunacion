@@ -51,7 +51,7 @@ $(document).ready(function(){
 			}, function(responseText) {
                             
                             $("#clienteEditarCita").html(responseText);
-                        
+                            $("#clienteEditarCita option[value = '"+$("#"+"idUsuarioCitas"+posCita+"").attr("alt")+"']").attr("selected",true);
                         });
                         
                     $.post('Controlador', {
@@ -61,16 +61,11 @@ $(document).ready(function(){
 			}, function(responseText) {
                             
                             $("#vacunaEditarCita").html(responseText);
+                            $("#vacunaEditarCita option[value = "+$("#"+"idVacunaCitas"+posCita+"").attr("alt")+"]").attr("selected",true);
                         
                         });
                     
                     $("#txtDetallesEditarcita").text($("#"+"detallesCita"+posCita+"").attr("alt"));
-                    
-                    
-                    $("#clienteEditarCita option[value = '"+$("#"+"nombreClienteCita"+posCita+"").attr("alt")+"']").attr("selected",true);
-                    
-                    $("#vacunaEditarCita option[value = '"+$("#"+"nombreVacunaCita"+posCita+"").attr("alt")+"']").attr("selected",true); 
-                    
                     
                     $("#completadaEditarCita option[value = '"+$("#"+"completada"+posCita+"").attr("alt")+"']").attr("selected",true); 
                     

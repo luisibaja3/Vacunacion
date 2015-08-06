@@ -481,6 +481,10 @@ public class Controlador extends HttpServlet {
                         
                         html+= "<input type='hidden' alt='"+cita.getNombreClienteCita()+"' id='nombreClienteCita"+conteoCitas+"'>";
                         
+                        html+= "<input type='hidden' alt='"+cita.getIdUsuario()+"' id='idUsuarioCitas"+conteoCitas+"'>";
+                        
+                        html+= "<input type='hidden' alt='"+cita.getIdVacuna()+"' id='idVacunaCitas"+conteoCitas+"'>";
+                        
                         html+= "<input type='hidden' alt='"+cita.getDetallesCita()+"' id='detallesCita"+conteoCitas+"'>";
                         
                         html+= "<input type='hidden' alt='"+cita.getCompletada()+"' id='completada"+conteoCitas+"'>";

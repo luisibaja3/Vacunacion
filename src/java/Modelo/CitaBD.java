@@ -48,6 +48,8 @@ public class CitaBD extends HttpServlet{
                 cita.setHoraCita(rs.getString("Hora"));
                 cita.setNombreVacunaCita(rs.getString("NombreVacuna"));
                 cita.setLugarCita(rs.getString("Direccion"));
+                cita.setIdUsuario(Integer.parseInt(rs.getString("IdUsuario")));
+                cita.setIdVacuna(Integer.parseInt(rs.getString("IdVacunas")));
                 //Lo adicionamos a nuestra lista
                 lista.add(cita);
             }
