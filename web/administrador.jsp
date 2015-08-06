@@ -589,9 +589,9 @@
                     <%-- Enlaces a las paginas de actualizar o eliminar--%>
                     <td>
                         
-                        <a><img src="images/edit.png" class="btnOpciones btnEditar" role="<%=conteoCitas%>"></a>
+                        <a><img src="images/edit.png" class="btnOpciones btnEditar btnOpcionesCitas" role="<%=conteoCitas%>"></a>
                         
-                        <a><img src="images/delete.png" class="btnOpciones btnBorrar" alt="<%= cita.getNombreClienteCita()%>" role="<%=conteoCitas%>"></a>
+                        <a><img src="images/delete.png" class="btnOpciones btnBorrar btnOpcionesCitas" alt="<%= cita.getNombreClienteCita()%>" role="<%=conteoCitas%>"></a>
                         
                         
                         <input type="hidden" alt="<%= cita.getIdCita()%>" id="idCitas<%=conteoCitas%>">
@@ -626,6 +626,48 @@
                 
                 
         </section>
+                
+                
+                  <div id="divInfoCitas" class="FondFrms">
+               
+                    <div id="contenedorInfo">
+                        
+                        <img class="cerrarForm" src="images/close.png" id="cerrarDivVacunas">
+                        
+                        <br>
+                        
+                        <h3 class="titutoInfo" id="tituloInfoCitas"></h3>
+                        
+                    <table border="0">
+                     
+                        <tr>
+                            <td><b>Fecha:</b></td><b><td id="tdFechaCita"></td></b>
+                        </tr>
+                        <tr>
+                            <td><b>Hora: </b></td><td id="tdHoraCita"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Detalle: </b></td><td id="tdDetalleCita"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Completada: </b></td><td id="tdCompletada"></td>
+                        </tr>
+                         <tr>
+                            <td><b>Paciente: </b></td><td id="tdPacienteCita"></td>
+                        </tr>
+                         <tr>
+                            <td><b>Lugar: </b></td><td id="tdLugarCita"></td>
+                        </tr>
+                         <tr>
+                            <td><b>Vacuna: </b></td><td id="tdVacunaCita"></td>
+                        </tr>
+                        
+                        
+                    </table>
+                
+                    </div>
+                    
+                </div>
         
                 <!--****************Agregar citas****************-->
                 

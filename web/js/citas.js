@@ -4,6 +4,47 @@ $(document).ready(function(){
 
                 var posCita = "";
                 var posQuitarCita = "";
+                
+                
+                //ver info de las citas
+                
+                                //Abrir toda la información del cliente
+            $('#tblcitas').on('click', '.btnVerInfoCitas', function(){
+                     
+                     posCita = $(this).attr("role");
+                     
+                     var elem = $("#"+"fechaCita"+posCita+"").attr("alt").split('-');
+                       
+                        var annio = elem[0];
+                        var mes = elem[1];
+                        var dia = elem[2];
+                     
+                        if($("#"+"completada"+posCita+"").attr("alt")=="0"){
+                                
+                            $("#tdCompletada").text("no");
+                        }else{
+                            
+                            $("#tdCompletada").text("sí");
+                        }
+                        
+                        $("#tituloInfoCitas").text("Información de cita");
+                     
+                     
+                        $("#tdFechaCita").text(dia+"-"+mes+"-"+annio);
+                        $("#tdHoraCita").text($("#"+"horaCita"+posCita+"").attr("alt"));
+                        $("#tdDetalleCita").text($("#"+"detallesCita"+posCita+"").attr("alt"));
+                        
+                        $("#tdPacienteCita").text($("#"+"nombreClienteCita"+posCita+"").attr("alt"));
+                        $("#tdLugarCita").text($("#"+"lugarCita"+posCita+"").attr("alt"));
+                        $("#tdVacunaCita").text($("#"+"nombreVacunaCita"+posCita+"").attr("alt"));
+                        
+                      
+                     $("#divInfoCitas").fadeIn();
+                     
+                     
+                 });
+                
+                
             
         $("#btnCitas").click(function(){
             

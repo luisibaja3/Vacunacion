@@ -469,9 +469,9 @@ public class Controlador extends HttpServlet {
                   html+=  "<td>Fecha: "+cita.getFechaCita()+"</td><td>Hora: "+cita.getHoraCita()+"</td><td>Vacuna: "+cita.getNombreVacunaCita()+"</td>";
                     html+=  "<td>Paciente: "+cita.getNombreClienteCita()+"</td><td>Lugar: "+cita.getLugarCita()+"</td><td>";
                         
-                        html+="<a><img src='images/edit.png' class='btnOpciones btnEditar' role="+conteoCitas+"></a>";
+                        html+="<a><img src='images/edit.png' class='btnOpciones btnEditar btnOpcionesCitas' role="+conteoCitas+"></a>";
                         
-                        html+="<a><img src='images/delete.png' class='btnOpciones btnBorrar' alt="+cita.getNombreClienteCita()+" role="+conteoCitas+"></a>";
+                        html+="<a><img src='images/delete.png' class='btnOpciones btnBorrar btnOpcionesCitas' alt="+cita.getNombreClienteCita()+" role="+conteoCitas+"></a>";
                         
                        html+= "<input type='hidden' alt='"+cita.getIdCita()+"' id='idCitas"+conteoCitas+">";
                         
@@ -479,7 +479,7 @@ public class Controlador extends HttpServlet {
                         
                         html+= "<input type='hidden' alt="+cita.getNombreClienteCita()+" id='nombreClienteCita"+conteoCitas+">";
                         
-                        html+= "<input type='hidden' alt="+cita.getDetallesCita()+" id='detallesCita"+conteoCitas+">";
+                        html+= "<input type='hidden' alt="+cita.getDetallesCita()+" id='detallesCita"+conteoCitas+"'>";
                         
                         html+= "<input type='hidden' alt="+cita.getCompletada()+" id='completada"+conteoCitas+">";
                         

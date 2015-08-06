@@ -14,7 +14,7 @@ public class Cita {
     private String fechaCita;//
     private String nombreClienteCita;
     private String detallesCita;//
-    private int completada;
+    private int completada;//
     private String horaCita;//
     private String nombreVacunaCita;
     private String lugarCita;
@@ -96,7 +96,4 @@ public class Cita {
     public void setLugarCita(String lugarCita) {
         this.lugarCita = lugarCita;
     }
-    
-    
-    
 }
