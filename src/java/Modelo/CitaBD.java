@@ -151,5 +151,47 @@ public class CitaBD extends HttpServlet{
             return exito;
             
         }
+      
+     public static String editarCitas(Cita cita) {
+        Connection cn = null;
+        CallableStatement cl = null;
+        String exito = "null";
+        
+        try {
+            //Nombre del procedimiento almacenado
+            String call = "{CALL actualizarCita(?,?,?,?,?,?)}";
+            cn = ConexionBD.getConexion();
+            cl = cn.prepareCall(call);
+            cl.setString(1, cita.getFechaCita());
+            cl.setInt(2, Integer.parseInt(cita.getNombreClienteCita()));
+            cl.setString(3, cita.getDetallesCita());
+            cl.setInt(4, cita.getCompletada());
+            cl.setString(5, cita.getHoraCita());
+            cl.setInt(6, Integer.parseInt(cita.getNombreVacunaCita()));
+            
+            //La sentencia lo almacenamos en un resulset
+            cl.executeQuery();
+            //Consultamos si hay datos para recorrerlo
+            //e insertarlo en nuestro array
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+            
+            exito="ok";
+
+        } catch (SQLException e) {
+            exito = e.toString();
+            e.printStackTrace();
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+            
+        } catch (Exception e) {
+             exito = e.toString();
+            System.out.print(e);
+            e.printStackTrace();
+            ConexionBD.cerrarCall(cl);
+            ConexionBD.cerrarConexion(cn);
+        }
+        return exito;
+    }
     
 }

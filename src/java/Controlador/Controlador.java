@@ -69,6 +69,8 @@ public class Controlador extends HttpServlet {
             this.cargarTablaCitas(request, response);
         }else if(accion.equals("borrarCita")){
             this.borrarCita(request, response);
+        }else if(accion.equals("editarCita")){
+            this.editarCita(request, response);
         }
 
     }
@@ -519,5 +521,31 @@ public class Controlador extends HttpServlet {
 
               out.println(estado);
         
+    }
+
+    private void editarCita(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        
+        response.setContentType( "text/html; charset=iso-8859-1" );
+        PrintWriter out = response.getWriter();
+        
+        Cita cita = new Cita();
+        String msj = "mal";
+        
+        cita.setIdCita(Integer.parseInt(request.getParameter("idCita")));
+        cita.setFechaCita(request.getParameter("diaCita")+"/"+request.getParameter("mesCita")+"/"+request.getParameter("annioCita"));
+        cita.setNombreClienteCita(request.getParameter("slClienteCita"));
+        cita.setDetallesCita(request.getParameter("txtDetallesCita"));
+        cita.setCompletada(Integer.parseInt(request.getParameter("slCompletada")));
+        cita.setHoraCita(request.getParameter("hora")+":"+request.getParameter("minutos")+" "+request.getParameter("slAmPmCita"));
+        cita.setNombreVacunaCita(request.getParameter("slVacunaCita"));
+        
+        if(CitaBD.editarCitas(cita)=="ok"){
+            
+            msj = "bien";
+            
+        }
+ 
+        out.println(msj);
+        out.println(CitaBD.editarCitas(cita));
     }
 }

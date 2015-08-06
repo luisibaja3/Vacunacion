@@ -680,7 +680,8 @@
             
                 <form role="form" method="post" id="EditarCitaForm" class="clienteForm">
                      
-                     <input type="hidden" name="action" value="guardarCita">
+                     <input type="hidden" name="action" value="editarCita">
+                     <input type="hidden" name="idCita" value="">
                     
                     <img class="cerrarForm" src="images/close.png">
           

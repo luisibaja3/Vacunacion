@@ -30,7 +30,11 @@ $(document).ready(function(){
                         AmPmFinal = "pm";
                     }
                     
-                    //FEcha
+                    //id cita
+                    
+                    $("#EditarCitaForm input[name = 'idCita']").val($("#"+"idCitas"+posCita+"").attr("alt"));
+                    
+                    //Fecha
                     $("#contenedorFechaEditarCita input[name = 'diaCita']").val(dia);
                     
                     $("#contenedorFechaEditarCita input[name = 'mesCita']").val(mes);
@@ -203,9 +207,53 @@ $(document).ready(function(){
                $("#completeGuardarCita").fadeIn();
                
            }else{
-               
+             $("#completeGuardarCita").fadeOut();
              var tipo = "Guardar";
              var form = "GuardarCitaForm";
+             guardarCita(tipo, form);
+               
+           }
+               
+            
+        });
+        
+        $("#btnGuardarEditarCita").click(function (){
+            
+           if ($("#diaEditarCita").val() == ""){
+               
+               $("#diaEditarCita").focus();
+               $("#completeEditarCita").fadeIn();
+               
+           }else if ($("#mesEditarCita").val() == ""){
+               
+               $("#mesEditarCita").focus();
+               $("#completeEditarCita").fadeIn();
+               
+           }else if ($("#annioEditarCita").val() == ""){
+               
+               $("#annioEditarCita").focus();
+               $("#completeEditarCita").fadeIn();
+               
+           }else if ($("#horaEditarCita").val() == ""){
+               
+               $("#horaEditarCita").focus();
+               $("#completeEditarCita").fadeIn();
+               
+           }else if ($("#minutosEditarCita").val() == ""){
+               
+               $("#minutosEditarCita").focus();
+               $("#completeEditarCita").fadeIn();
+               
+           }else if($("#txtDetallesEditarCita").val() == ""){
+               
+               $("#txtDetallesEditarCita").focus();
+               $("#completeEditarCita").fadeIn();
+               
+           }else{
+             
+             $("#completeEditarCita").fadeOut();
+             var tipo = "Editar";
+             var form = "EditarCitaForm";
              guardarCita(tipo, form);
                
            }
@@ -231,7 +279,9 @@ $(document).ready(function(){
 			})
 			.done(function(data) {//Cuando nuestra función finalice, recuperamos la respuesta
            
-                            if(data == "mal"){
+                                     alert(data)
+                            
+                            if(data.length()==3){
                                 
                                 $("#"+aviso+"").text("Error al guardar");
                                 $("#"+aviso+"").css("color","red");
@@ -240,9 +290,10 @@ $(document).ready(function(){
                                     
                                     $("#"+aviso+"").text("¡Guardada con éxito!");
                                     $("#"+aviso+"").css("color","green");
-                                    limpiarFormCitas();
-                                    cargarTablaCitas();
                                     
+                           
+                                    cargarTablaCitas();
+                                    limpiarFormCitas();
                                 }
                                 
                                 
