@@ -27,7 +27,7 @@ $(document).ready(function(){
                     var mes = elem[1];
                     var dia = elem[2];
                      
-                        $(".titutoInfoCliente").text($("#"+"nombreUser"+posUser+"").attr("alt")+" "+$("#"+"apellidosUser"+posUser+"").attr("alt"));
+                        $("#tituloInfoCliente").text($("#"+"nombreUser"+posUser+"").attr("alt")+" "+$("#"+"apellidosUser"+posUser+"").attr("alt"));
                      
                         $("#tdCedulaCliente").text($("#"+"cedulaUser"+posUser+"").attr("alt"));
                         $("#tdNacimientoCliente").text(dia+"-"+mes+"-"+annio);

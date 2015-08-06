@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/lasc/NetBeansProjects/Vacunacion/web/index.jsp</file>
+            <file>file:/home/lasc/NetBeansProjects/Vacunacion/src/java/Modelo/Cita.java</file>
             <file>file:/home/lasc/NetBeansProjects/Vacunacion/src/java/Modelo/UsuarioBD.java</file>
-            <file>file:/home/lasc/NetBeansProjects/Vacunacion/web/administrador.jsp</file>
             <file>file:/home/lasc/NetBeansProjects/Vacunacion/src/java/Controlador/Controlador.java</file>
-            <file>file:/home/lasc/NetBeansProjects/Vacunacion/web/styles/admin.css</file>
+            <file>file:/home/lasc/NetBeansProjects/Vacunacion/web/administrador.jsp</file>
             <file>file:/home/lasc/NetBeansProjects/Vacunacion/web/js/cliente.js</file>
-            <file>file:/home/lasc/NetBeansProjects/Vacunacion/src/java/Modelo/ConexionBD.java</file>
+            <file>file:/home/lasc/NetBeansProjects/Vacunacion/web/js/vacuna.js</file>
+            <file>file:/home/lasc/NetBeansProjects/Vacunacion/web/js/citas.js</file>
+            <file>file:/home/lasc/NetBeansProjects/Vacunacion/src/java/Modelo/CitaBD.java</file>
         </group>
     </open-files>
 </project-private>

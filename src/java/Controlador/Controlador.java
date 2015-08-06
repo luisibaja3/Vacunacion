@@ -4,6 +4,8 @@
  */
 package Controlador;
 
+import Modelo.Cita;
+import Modelo.CitaBD;
 import Modelo.Usuario;
 import Modelo.UsuarioBD;
 import Modelo.Vacunas;
@@ -61,6 +63,10 @@ public class Controlador extends HttpServlet {
             this.cargarOptionsClientes(request, response);
         }else if(accion.equals("cargarOptionsVacunas")){
             this.cargarOptionsVacunas(request, response);
+        }else if(accion.equals("guardarCita")){
+            this.guardarCita(request, response);
+        }else if(accion.equals("cargarTablaCitas")){
+            this.cargarTablaCitas(request, response);
         }
 
     }
@@ -404,5 +410,95 @@ public class Controlador extends HttpServlet {
                 
         out.println(html);
         
+    }
+
+    private void guardarCita(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    
+        response.setContentType( "text/html; charset=iso-8859-1" );
+        PrintWriter out = response.getWriter();
+        
+        String msj = "mal";
+        
+        
+        Cita cita = new Cita();
+        
+        cita.setFechaCita(request.getParameter("diaCita")+"/"+request.getParameter("mesCita")+"/"+request.getParameter("annioCita"));
+        cita.setNombreClienteCita(request.getParameter("slClienteCita"));
+        cita.setDetallesCita(request.getParameter("txtDetallesCita"));
+        cita.setCompletada(0);
+        cita.setHoraCita(request.getParameter("hora")+":"+request.getParameter("minutos")+" "+request.getParameter("slAmPmCita"));
+        cita.setNombreVacunaCita(request.getParameter("slVacunaCita"));
+        
+        if(CitaBD.guardarCita(cita)=="ok"){
+            
+            msj = "bien";
+            
+        }
+        
+        
+        out.println(msj);
+    }
+
+    private void cargarTablaCitas(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  
+        response.setContentType( "text/html; charset=iso-8859-1" );
+        PrintWriter out = response.getWriter();
+        
+      String html = "<table id='tblcitas' border='0px'>";
+            
+                               
+           ArrayList<Cita> listaCitas = CitaBD.cargarCitas();
+                           int conteoCitas = 1;
+                           int conteoImgs = 1;
+                     
+                 for (Cita cita : listaCitas) {
+                         String completada = "";
+                         
+                                
+                            if(conteoImgs == 3){
+                               conteoImgs = 1;
+                           }
+                         
+                                if(cita.getCompletada()==0){
+                           
+               
+               html+= "<tr id='trCita"+conteoCitas+"'>";
+                    
+                   html+= "<td><img src='images/citas"+conteoImgs+".png' class='imgsCitas btnVerInfoCitas' role='"+conteoCitas+"'></td>";
+                    
+                  html+=  "<td>Fecha: "+cita.getFechaCita()+"</td><td>Hora: "+cita.getHoraCita()+"</td><td>Vacuna: "+cita.getNombreVacunaCita()+"</td>";
+                    html+=  "<td>Paciente: "+cita.getNombreClienteCita()+"</td><td>Lugar: "+cita.getLugarCita()+"</td><td>";
+                        
+                        html+="<a><img src='images/edit.png' class='btnOpciones btnEditar' role="+conteoCitas+"></a>";
+                        
+                        html+="<a><img src='images/delete.png' class='btnOpciones btnBorrar' alt="+cita.getNombreClienteCita()+" role="+conteoCitas+"></a>";
+                        
+                       html+= "<input type='hidden' alt='"+cita.getIdCita()+"' id='idCitas"+conteoCitas+">";
+                        
+                        html+= "<input type='hidden' alt="+cita.getFechaCita()+" id='fechaCita"+conteoCitas+">";
+                        
+                        html+= "<input type='hidden' alt="+cita.getNombreClienteCita()+" id='nombreClienteCita"+conteoCitas+">";
+                        
+                        html+= "<input type='hidden' alt="+cita.getDetallesCita()+" id='detallesCita"+conteoCitas+">";
+                        
+                        html+= "<input type='hidden' alt="+cita.getCompletada()+" id='completada"+conteoCitas+">";
+                        
+                        html+= "<input type='hidden' alt="+cita.getHoraCita()+" id='horaCita"+conteoCitas+">";
+                        
+                        html+= "<input type='hidden' alt="+cita.getNombreVacunaCita()+" id='nombreVacunaCita"+conteoCitas+">";
+                        
+                       html+= "<input type='hidden' alt="+cita.getLugarCita()+" id='lugarCita"+conteoCitas+"></td></tr>";
+                
+                                } 
+                                
+                                conteoCitas++;
+                                conteoImgs++;
+                     
+                     }
+                 
+                  html+="</table>";
+                
+                  out.println(html);
+                  
     }
 }

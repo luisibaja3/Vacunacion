@@ -103,6 +103,65 @@ $(document).ready(function(){
                });
                
                
+               //Abrir editar vacunas
+                
+                $('#tblVacunas').on('click', '.btnEditar', function(){
+                    
+                    posVacuna = $(this).attr("role");
+
+                    var estado = $("#"+"estadoVacuna"+posVacuna+"").attr("alt");
+                    
+                    $("#FormEditarVacuna input[name = 'txtIdVacuna']").val($("#"+"idVacunas"+posVacuna+"").attr("alt"));
+                    
+                    $("#FormEditarVacuna input[name = 'txtOldNameVacuna']").val($("#"+"nombreVacuna"+posVacuna+"").attr("alt"));
+                
+                    $("#FormEditarVacuna input[name = 'txtNombreVacuna']").val($("#"+"nombreVacuna"+posVacuna+"").attr("alt"));
+                    
+                    $("#FormEditarVacuna input[name = 'txtDescripcionVacuna']").val($("#"+"descripcionVacuna"+posVacuna+"").attr("alt"));
+                    
+                    $("#FormEditarVacuna input[name = 'txtTipoVacuna']").val($("#"+"tipoVacuna"+posVacuna+"").attr("alt"));
+                    
+                    if(estado == "activada"){
+                        
+                        $(".selectEstadoVacuna option[value=1]").attr("selected",true); 
+                        
+                    }else{
+                        
+                         $(".selectEstadoVacuna option[value=0]").attr("selected",true); 
+                        
+                    }
+                    
+                    $("#divEditarVacuna").fadeIn();
+                    
+                });
+               
+                                //capturar btn guardar editar vacuna
+                 
+                  $("#btnGuardarEditarVacuna").click(function(){
+                    
+                    if($("#FormEditarVacuna input[name = 'txtNombreVacuna']").val() == ""){
+                        
+                    $("#FormEditarVacuna input[name = 'txtNombreVacuna']").focus();
+                    $("#completeEditarVacunas").fadeIn();
+                        
+                    }else if($("#FormEditarVacuna input[name = 'txtDescripcionVacuna']").val() == ""){
+                        
+                    $("#FormEditarVacuna input[name = 'txtDescripcionVacuna']").focus();
+                    $("#completeEditarVacunas").fadeIn();
+                        
+                    }else if($("#FormEditarVacuna input[name = 'txtTipoVacuna']").val() == ""){
+                        
+                    $("#FormEditarVacuna input[name = 'txtTipoVacuna']").focus();
+                    $("#completeEditarVacunas").fadeIn();
+                        
+                    }else{ 
+                         $("#completeEditarVacunas").fadeOut();
+                         var form = "FormEditarVacuna";
+                         var tipo = "Editar";
+                         guardarVacuna(tipo, form);
+                        
+                    }
+               });
                
     
 });

@@ -1,38 +1,3 @@
-<%-- 
-    Document   : Administrador
-    Created on : Jun 18, 2015, 6:09:57 PM
-    Author     : LuisAntonio
---%>
-<%@page import="Modelo.CitaBD"%>
-<%@page import="Modelo.Cita"%>
-<%@page import="Modelo.VacunasBD"%>
-<%@page import="Modelo.Vacunas"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.*"%>
-<%@page import="Modelo.UsuarioBD"%>
-<%@page import="Modelo.Usuario"%>
-<%@page import="javax.swing.JOptionPane"%>
-<%@page import="java.io.IOException"%>
-<%@page import="java.lang.String"%>
-<%@page import="javax.servlet.http.HttpSession"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<%
-    
-    String usuario = (String) session.getAttribute("usuario");
-    String nombre = (String) session.getAttribute("nombre");
-    String correo = (String) session.getAttribute("correo");        
-    String rol = (String) session.getAttribute("rol");
-    
-    if(!rol.equals("administrador")){
-       if(rol.equals("cliente")){
-           response.sendRedirect("cliente.jsp");
-       }else{
-           response.sendRedirect("index.jsp");
-        }
-    } 
- 
-%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,7 +11,6 @@
         <script type="text/javascript" src="js/admin.js"></script>
         <script type="text/javascript" src="js/cliente.js"></script>
         <script type="text/javascript" src="js/vacuna.js"></script>
-        <script type="text/javascript" src="js/citas.js"></script>
     </head>
     <body>
                
@@ -180,7 +144,7 @@
                     <input type="text" name="txtApellidos" value="" placeholder="Apellidos">
                     <input type="number" name="txtCedula" value="" placeholder="Cédula" min="1">
                   
-                    <div class="contenedorFecha" class="fechaEditarCliente">
+                    <div class="contenedorFecha fechaEditarCliente">
                     
                     <h3>fecha de nacimiento:</h3>
                     <input class="fechaForm" type="number" name="diaCliente" value="" placeholder="día" id="diaCliente" min="1" max="31">  
@@ -504,7 +468,6 @@
                 <%
                       conteoVacunas++;     }
                 %>
-
             </table>
                 
             </div>
@@ -526,9 +489,112 @@
                 <img src="images/conf.png" id="conficon">
                 
             </div> 
-        </header>                
+        </header>
+                    
+        <section>
+        
+            <table id="tblcitas" border="0px">
             
-        <div id="contenedorMenu">
+                <tr id="cita1">
+                    <td><img src="images/citas1.png" class="imgsCitas"></td>
+                    <td>Fecha: 24/03/2013</td>
+                    <td>Hora: 2pm</td>
+                    <td>Vacuna: Fiebre</td>
+                    <td>Paciente: Valeria</td>
+                    <td>Lugar: Heredia</td>
+                    <td>
+                        <a><img src="images/edit.png" class="btnOpciones btnEditar" role=""></a>
+                        <a><img src="images/delete.png" class="btnOpciones btnBorrar" alt="" role=""></a>
+                    </td> 
+                </tr>
+                
+                <tr cita2>
+                    <td><img src="images/citas1.png" class="imgsCitas"></td>
+                    <td>Fecha: 24/03/2013</td>
+                    <td>Hora: 2pm</td>
+                    <td>Vacuna: Fiebre</td>
+                    <td>Paciente: Valeria</td>
+                    <td>Lugar: Heredia</td>
+                    <td>
+                        <a><img src="images/edit.png" class="btnOpciones btnEditar" role=""></a>
+                        <a><img src="images/delete.png" class="btnOpciones btnBorrar" alt="" role=""></a>
+                    </td>    
+                        
+                </tr>
+                
+            </table>
+                
+        </section>
+        
+            <div class="FondFrms" id="divAgregarCita">
+            
+                <form role="form" method="post" id="GuardarCitaForm" class="clienteForm">
+                     
+                    <img class="cerrarForm" src="images/close.png">
+          
+                     <h3 class="titutoFrm">Agregar cita</h3>
+                  
+                    <div id="contenedorFechaCita" class="contenedorFecha">
+                    
+                        <h3>fecha de la cita:</h3>
+                            <input class="fechaForm" type="number" name="diaCita" value="" placeholder="día" id="diaCita" min="1" max="31">  
+                            <input class="fechaForm" type="number" name="mesCita" value="" placeholder="mes" id="mesCita" min="1" max="12">
+                            <input class="fechaForm" type="number" name="annioCita" value="" placeholder="año" id="annioCita" min="1900" max="2200">
+
+                    </div>
+                    
+                    <div id="ContenedorHoraCita" class="contenedorFecha">
+                    <br>
+                        <h3>Hora de la cita:</h3>
+                            <input class="fechaForm" type="number" name="Hora" value="" placeholder="hora" id="horaCita" min="1" max="12">
+                            <input class="fechaForm" type="number" name="Minutos" value="" placeholder="minutos" id="minutosCita" min="1" max="59">
+                            
+                        <select id="AmPmCita" class="selectCitas">
+                                <option value="am">am</option>
+                                <option value="pm">pm</option>
+                            </select>
+                    </div>
+                    <br>
+                    <h3>Descripción:</h3>
+                    <textarea name="txtDetallesCita" class="txtAreaCitas"></textarea>
+                    
+                <div class="DivSlEditCliente">
+                    
+                    <p class="pSlEditCliente">Cliente:</p>
+                   
+                        <select name="slRol"  class="SlEditCliente" id="clienteGuardarCita">
+
+                        <option value="123421">Valeria</option>
+                        <option value="123421">Mariana</option>
+
+                        </select>
+                               
+                  </div>   
+                    
+                    
+                <div class="DivSlEditCliente">
+                    
+                    <p class="pSlEditCliente">Vacuna:</p>
+                   
+                        <select name="slRol"  class="SlEditCliente" id="vacunaGuardarCita">
+
+                        <option value="123421">Fiebre</option>
+                        <option value="123421">AH1N1</option>
+
+                        </select>
+                               
+                  </div>
+                    
+                    <input type="button" value="Guardar" class="btnGuardar" id="btnGuardarCliente">
+                       <h3 id="completeGuardar" class="frmAlertas">Complete todos los campos</h3>
+                        <h3 id="avisoAjaxGuardar" class="frmAlertas">Guardando cliente...</h3>
+              
+                </form>
+            
+            </div>
+                    
+                    
+                            <div id="contenedorMenu">
         <div id="PanelMenu" class="menu animated">
             
             <img src="images/ocultarMenu.png" id="ocultarMenu">
@@ -548,156 +614,10 @@
                 
             </div>
             
-            
         </div>
         
         </div>
-
-        <section>
-                
-            <table id="tblcitas" border="0px">
-            
-                                <%
-                     ArrayList<Cita> listaCitas = CitaBD.cargarCitas();
-                           int conteoCitas = 1;
-                           int conteoImgs = 1;
-                           
-                           
-                           
-                           
-                     for (Cita cita : listaCitas) {
-                         String completada = "";
-                         
-                                
-                            if(conteoImgs == 3){
-                               conteoImgs = 1;
-                           }
-                         
-                                if(cita.getCompletada()==0){
-                           
-                %>
-                <tr id="trCita<%=conteoCitas%>">
                     
-                    <td><img src="images/citas<%=conteoImgs+".png"%>" class="imgsCitas btnVerInfoCitas" role="<%=conteoCitas%>"></td>
-                    
-                    <td>Fecha: <%= cita.getFechaCita()%></td>
-                    <td>Hora: <%= cita.getHoraCita()%></td>
-                    <td>Vacuna: <%= cita.getNombreVacunaCita()%></td>
-                    <td>Paciente: <%= cita.getNombreClienteCita()%></td>
-                    <td>Lugar: <%= cita.getLugarCita()%></td>
-                    
-                    <%-- Enlaces a las paginas de actualizar o eliminar--%>
-                    <td>
-                        
-                        <a><img src="images/edit.png" class="btnOpciones btnEditar" role="<%=conteoCitas%>"></a>
-                        
-                        <a><img src="images/delete.png" class="btnOpciones btnBorrar" alt="<%= cita.getNombreClienteCita()%>" role="<%=conteoCitas%>"></a>
-                        
-                        
-                        <input type="hidden" alt="<%= cita.getIdCita()%>" id="idCitas<%=conteoCitas%>">
-                        
-                        <input type="hidden" alt="<%= cita.getFechaCita()%>" id="fechaCita<%=conteoCitas%>">
-                        
-                        <input type="hidden" alt="<%= cita.getNombreClienteCita()%>" id="nombreClienteCita<%=conteoCitas%>">
-                        
-                        <input type="hidden" alt="<%= cita.getDetallesCita()%>" id="detallesCita<%=conteoCitas%>">
-                        
-                        <input type="hidden" alt="<%= cita.getCompletada()%>" id="completada<%=conteoCitas%>">
-                        
-                        <input type="hidden" alt="<%= cita.getHoraCita()%>" id="horaCita<%=conteoCitas%>">
-                        
-                        <input type="hidden" alt="<%= cita.getNombreVacunaCita()%>" id="nombreVacunaCita<%=conteoCitas%>">
-                        
-                        <input type="hidden" alt="<%= cita.getLugarCita()%>" id="lugarCita<%=conteoCitas%>">
-                        
-                    </td>
-                    
-                </tr>
-                <%
-                                } 
-                                
-                                conteoCitas++;
-                                conteoImgs++;
-                     
-                     }
-                %>
-                
-            </table>
-                
-                
-        </section>
-        
-                <!--****************Agregar citas****************-->
-                
-                <div class="FondFrms" id="divAgregarCita">
-            
-                <form role="form" method="post" id="GuardarCitaForm" class="clienteForm">
-                     
-                     <input type="hidden" name="action" value="guardarCita">
-                    
-                    <img class="cerrarForm" src="images/close.png">
-          
-                     <h3 class="titutoFrm">Agregar cita</h3>
-                  
-                    <div id="contenedorFechaCita" class="contenedorFecha">
-                    
-                        <h3>fecha de la cita:</h3>
-                            <input class="fechaForm" type="number" name="diaCita" value="" placeholder="día" id="diaCita" min="1" max="31">  
-                            <input class="fechaForm" type="number" name="mesCita" value="" placeholder="mes" id="mesCita" min="1" max="12">
-                            <input class="fechaForm" type="number" name="annioCita" value="" placeholder="año" id="annioCita" min="1900" max="2200">
-
-                    </div>
-                    
-                    <div id="ContenedorHoraCita" class="contenedorFecha">
-                    <br>
-                        <h3>Hora de la cita:</h3>
-                            <input class="fechaForm" type="number" name="hora" value="" placeholder="hora" id="horaCita" min="1" max="12">
-                            <input class="fechaForm" type="number" name="minutos" value="" placeholder="minutos" id="minutosCita" min="1" max="59">
-                            
-                            <select name="slAmPmCita" id="AmPmCita" class="selectCitas">
-                                <option value="am">am</option>
-                                <option value="pm">pm</option>
-                        </select>
-                    </div>
-                    <br>
-                    <h3>Descripción:</h3>
-                    <textarea name="txtDetallesCita" class="txtAreaCitas" id="txtGuardarCita"></textarea>
-                    
-                <div class="DivSlEditCliente">
-                    
-                    <p class="pSlEditCliente">Cliente:</p>
-                   
-                        <select name="slClienteCita"  class="SlEditCliente" id="clienteGuardarCita">
-
-                        <option value="123421">Cargando..</option>
-
-                        </select>
-                               
-                  </div>   
-                    
-                    
-                <div class="DivSlEditCliente">
-                    
-                    <p class="pSlEditCliente">Vacuna:</p>
-                   
-                        <select name="slVacunaCita"  class="SlEditCliente" id="vacunaGuardarCita">
-
-                        <option value="123421">Cargando..</option>
-
-                        </select>
-                               
-                  </div>
-                    
-                    <input type="button" value="Guardar" class="btnGuardar" id="btnGuardarCita">
-                    
-                       <h3 id="completeGuardarCita" class="frmAlertas">Complete todos los campos</h3>
-                        <h3 id="avisoAjaxGuardarCita" class="frmAlertas">Guardando cita...</h3>
-              
-                </form>
-            
-            </div>
-                
-                
         <footer>
             <h2 id="nombreUsuario">Bienvenido, <%=nombre%></h2>
                     

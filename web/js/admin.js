@@ -5,6 +5,7 @@ $(document).ready(function () {
                     if ( e.which == 27 ) {
                                ocultarMenu();
                                cerrarDivsCRUDE();
+                               limpiarFormClientes();
                                 
                         };
                 });
@@ -24,12 +25,19 @@ $(document).ready(function () {
                     $(".divEntidades").fadeOut();
                 })
                 
-                $("#btnNoEliminar").click(function(){
+                $(".btnNegativo").click(function(){
                       cerrarDivsCRUDE();
                 });
     
                     
-                $(".cerrarForm").click(cerrarDivsCRUDE);
+                $(".cerrarForm").click(function (){
+                    
+                     cerrarDivsCRUDE();
+                     limpiarFormClientes();
+                    
+                });
+                        
+           
 
                 function cerrarDivsCRUDE(){
                     $(".FondFrms").fadeOut();                    

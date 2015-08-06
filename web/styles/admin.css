@@ -270,7 +270,6 @@ box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.75);
     height: 35px;
     font-size: 1.4em;
     cursor: pointer;
-    
 }
 
 
@@ -289,7 +288,7 @@ box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.75);
 }
 
 .divEntidades{
-     position: absolute;
+    position: absolute;
     width: 100%;
     height: 100%;
     background-color: white;
@@ -362,14 +361,6 @@ box-shadow: -2px 0px 5px 0px rgba(0,0,0,0.75);
     text-decoration: underline;
 }
 
-section{
-    
-    position: absolute;
-    margin-top: 200px;
-    margin-left: 200px;
-    
-}
-
 .fechaForm{
     text-align: center !important;
     width: 100px !important;
@@ -378,7 +369,7 @@ section{
     margin-right: 8px !important;
 }
 
-#contenedorFecha{
+.contenedorFecha{
     text-align: center;
     display: table;
     margin: auto;
@@ -405,7 +396,7 @@ section{
     
 }
 
-#btnAgregarClientes{
+.btnAgregarEntidades{
     color: rgb(44,62, 80);
     width: 200px;
     margin-top: 20px;
@@ -468,8 +459,142 @@ section{
     background: white;
 }
 
+#contenedorInfo{
+    background: #f7f7f7;
+    display: table;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 10px;
+    padding-bottom: 20px;
+}
+
+.titutoInfo{
+    text-align: center;
+    padding: 15px;
+    padding-left: 70px;
+    padding-right: 70px;
+    border-top: 1px solid rgba(44, 62, 80, 0.33);
+    border-bottom: 1px solid rgba(44, 62, 80, 0.33);
+    background: white;
+    font-size: 1.7em;
+    color: rgb(237, 125, 49);
+    margin-bottom: 10px;
+}
+
+.btnEditDos{
+    padding: 5px;
+}
+
+.btnEditDos:hover{
+    cursor: pointer;
+}
+
+#contenedorInfo table{
+    background: #f7f7f7;
+    display: table;
+    margin: auto;
+    border: none;
+    
+}
+
+#contenedorInfo table td{
+    border: none;
+}
+
+
+#contenedorBtnConfAdmin{
+    position: fixed;
+    bottom: 25px;
+    display: table;
+    margin: auto;
+        width: 300px;   
+}
+
+#btnConfAdmin{
+    display: table;
+    margin: auto;
+}
+
+#btnConfAdmin:hover{
+    cursor: pointer;
+}
+
+#btnConfAdmin img{
+    width: 60px;
+}
+
+section{
+    
+    margin-top: 100px;
+    position: absolute;
+    width: 100%;
+    z-index: -3;
+    
+}
+
+#tblcitas{
+    background: rgba(255, 255, 255, 0);
+    border: 0px;
+    text-align: center;
+    display: table;
+    margin: auto; 
+}
+
+#tblcitas tr{
+    background: rgba(0, 0, 0, 0.08);
+    display: block;
+    margin: 20px;
+    height: 40px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+#tblcitas tr:hover{
+    cursor: pointer;
+    background:  rgba(45, 176, 105, 0.28);
+}
+
+#tblcitas tr td{
+     border: 0px;
+}
+
+.imgsCitas{
+    width: 25px;
+}
+
+.selectCitas{
+    text-align: center;
+    color: rgb(44, 62, 80);
+    border: 1px solid #464646;
+    border-radius: 8px;
+    display: table;
+    margin: auto;
+    margin-top: 10px;
+    font-size: 1.5em;
+    background: white;
+    padding: 1px;
+    font-family:inherit;
+}
+
+.txtAreaCitas{
+    color: rgb(44, 62, 80);
+    border: 1px solid #464646;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 1.2em;
+    background: white;
+    padding: 1px;
+    font-family:inherit;
+    width: 340px;
+    height: 50px;
+    padding: 5px;
+    resize: none;
+}
+
 @media screen and (max-width: 1050px){
     .titulos{
         display: none !important;
     }
+    
+    
 }
